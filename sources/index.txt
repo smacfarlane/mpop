@@ -22,8 +22,8 @@ ahamap.
 
 Reprojection of data is also available through the use of pyresample_.
 
-.. _project: http://github.com/mraspaud/mpop.git
-.. _mipp: http://github.com/loerum/mipp.git
+.. _project: http://github.com/mraspaud/mpop
+.. _mipp: http://github.com/loerum/mipp
 .. _pyresample: http://pyresample.googlecode.com
 
 .. toctree::
