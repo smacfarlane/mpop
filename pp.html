@@ -53,6 +53,7 @@
 <li><a class="reference internal" href="#conventions-about-satellite-names">Conventions about satellite names</a></li>
 <li><a class="reference internal" href="#creating-a-scene-object">Creating a scene object</a></li>
 <li><a class="reference internal" href="#loading-the-data">Loading the data</a></li>
+<li><a class="reference internal" href="#re-projecting-data">Re-projecting data</a></li>
 <li><a class="reference internal" href="#image-composites">Image composites</a></li>
 <li><a class="reference internal" href="#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
 <li><a class="reference internal" href="#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
@@ -155,6 +156,18 @@ volume of data to load and the performance of the host computer. The channels
 listed as arguments become loaded, and cannot be reloaded: a subsequent call to
 the method will not reload the data from disk.</p>
 </div>
+<div class="section" id="re-projecting-data">
+<h2>Re-projecting data<a class="headerlink" href="#re-projecting-data" title="Permalink to this headline">¶</a></h2>
+<p>Once the data is loaded, one might need to re-project the data. The scene
+objects can be projected onto other areas if the <a class="reference external" href="http://googlecode.com/p/pyresample">pyresample</a> software is
+installed, thanks to the <a class="reference internal" href="#pp.scene.SatelliteInstrumentScene.project" title="pp.scene.SatelliteInstrumentScene.project"><tt class="xref py py-meth docutils literal"><span class="pre">pp.scene.SatelliteInstrumentScene.project()</span></tt></a>
+method. As input, this method takes either a Definition object (see
+pyresample&#8217;s documentation) or string identificator for the area. In the latter
+case, the referenced region has to be defined in the <cite>areas.def</cite> file located
+in the directory pointed by the <cite>PPP_CONFIG_DIR</cite> environment variables.</p>
+<p>For more information about the internals of the projection process, take a look
+at the <a class="reference internal" href="#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
+</div>
 <div class="section" id="image-composites">
 <h2>Image composites<a class="headerlink" href="#image-composites" title="Permalink to this headline">¶</a></h2>
 <p>Methods building image composites are distributed in different modules, taking
@@ -163,7 +176,7 @@ advantage of the hierarchical structure offered by OOP.</p>
 <a class="reference internal" href="#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
 <tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.avhrr</span></tt> or <a class="reference internal" href="satellites_h.html#module-pp.instruments.seviri" title="pp.instruments.seviri"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.seviri</span></tt></a> overload these
 methods to adapt better for the instrument at hand.</p>
-<p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Image</em></a>.</p>
+<p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Geographic images</em></a>.</p>
 </div>
 <div class="section" id="adding-a-new-satellite-configuration-file">
 <h2>Adding a new satellite: configuration file<a class="headerlink" href="#adding-a-new-satellite-configuration-file" title="Permalink to this headline">¶</a></h2>

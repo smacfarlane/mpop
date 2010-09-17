@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Image &mdash; mpop v0.9.0 documentation</title>
+    <title>Geographic images &mdash; mpop v0.9.0 documentation</title>
     <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -49,6 +49,15 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Geographic images</a><ul>
+<li><a class="reference internal" href="#module-imageo.image">Simple images</a></li>
+<li><a class="reference internal" href="#module-imageo.geo_image">Geographically enriched images</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="rs_images.html"
                         title="previous chapter">Images for remote sensing</a></p>
@@ -81,8 +90,14 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-imageo.image">
-<span id="image"></span><span id="geographic-images"></span><h1>Image<a class="headerlink" href="#module-imageo.image" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="geographic-images">
+<span id="id1"></span><h1>Geographic images<a class="headerlink" href="#geographic-images" title="Permalink to this headline">¶</a></h1>
+<p>In order to build satellite composites, mpop has to handle images. We could
+have used PIL, but we felt the need to use numpy masked arrays as base for our
+image channels, and we had to handle geographically enriched images. Hence the
+two following modules: <a class="reference internal" href="#module-imageo.image" title="imageo.image"><tt class="xref py py-mod docutils literal"><span class="pre">imageo.image</span></tt></a> to handle simple images, and <a class="reference internal" href="#module-imageo.geo_image" title="imageo.geo_image"><tt class="xref py py-mod docutils literal"><span class="pre">imageo.geo_image</span></tt></a>.</p>
+<div class="section" id="module-imageo.image">
+<span id="simple-images"></span><h2>Simple images<a class="headerlink" href="#module-imageo.image" title="Permalink to this headline">¶</a></h2>
 <p>This module defines the image class. It overlaps largely the PIL library,
 but has the advandage of using masked arrays as pixel arrays, so that data
 arrays containing invalid values may be properly handled.</p>
@@ -293,6 +308,42 @@ equalization on channel <em>ch_nb</em>.</p>
 <dd><p>Convert the three YCbCr channels to RGB channels.</p>
 </dd></dl>
 
+</div>
+<div class="section" id="module-imageo.geo_image">
+<span id="geographically-enriched-images"></span><h2>Geographically enriched images<a class="headerlink" href="#module-imageo.geo_image" title="Permalink to this headline">¶</a></h2>
+<p>Module for geographic images.</p>
+<dl class="class">
+<dt id="imageo.geo_image.GeoImage">
+<em class="property">class </em><tt class="descclassname">imageo.geo_image.</tt><tt class="descname">GeoImage</tt><big>(</big><em>channels</em>, <em>area_id</em>, <em>time_slot</em>, <em>mode='L'</em>, <em>crange=None</em>, <em>fill_value=None</em>, <em>palette=None</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines geographic images. As such, it contains not only data
+of the different <em>channels</em> of the image, but also the area on which it is
+defined (<em>area_id</em> parameter) and <em>time_slot</em> of the snapshot.</p>
+<p>The channels are considered to contain floating point values in the range
+[0.0,1.0]. In order to normalize the input data, the <em>crange</em> parameter
+defines the original range of the data. The conversion to the classical
+[0,255] range and byte type is done automagically when saving the image to
+file.</p>
+<p>See also <tt class="xref py py-class docutils literal"><span class="pre">image.Image</span></tt> for more information.</p>
+<dl class="method">
+<dt id="imageo.geo_image.GeoImage.add_overlay">
+<tt class="descname">add_overlay</tt><big>(</big><em>color=(0</em>, <em>0</em>, <em>0)</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage.add_overlay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add coastline and political borders to image, using <em>color</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="imageo.geo_image.GeoImage.save">
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=0</em>, <em>tags=None</em>, <em>gdal_options=None</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the image to the given <em>filename</em>. If the extension is &#8220;tif&#8221;,
+the image is saved to <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, in which case the <em>compression</em>
+level can be given ([0, 9], 0 meaning off). See also
+<tt class="xref py py-meth docutils literal"><span class="pre">image.Image.save()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">image.Image.double_save()</span></tt>, and
+<tt class="xref py py-meth docutils literal"><span class="pre">image.Image.secure_save()</span></tt>.  The <em>tags</em> argument is a dict of tags
+to include in the image (as metadata).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
