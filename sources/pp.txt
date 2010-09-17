@@ -30,10 +30,8 @@ Creating custom images
 Adding a new satellite: configuration file
 ==========================================
 
-bli bli
 
 Adding a new satellite: python code
 ===================================
 
-blo blo
 
