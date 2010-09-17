@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Geographical images: geo_image &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="up" title="Images for remote sensing" href="rs_images.html" />
+    <link rel="prev" title="Image" href="image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Image"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li>
+          <li><a href="rs_images.html" accesskey="U">Images for remote sensing</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="image.html"
+                                  title="previous chapter">Image</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="sources/geo_image.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-imageo.geo_image">
+<h1>Geographical images: <tt class="xref docutils literal"><span class="pre">geo_image</span></tt><a class="headerlink" href="#module-imageo.geo_image" title="Permalink to this headline">¶</a></h1>
+<p>Module for geographic images.</p>
+<dl class="class">
+<dt id="imageo.geo_image.GeoImage">
+<em class="property">class </em><tt class="descclassname">imageo.geo_image.</tt><tt class="descname">GeoImage</tt><big>(</big><em>channels</em>, <em>area_id</em>, <em>time_slot</em>, <em>mode='L'</em>, <em>crange=None</em>, <em>fill_value=None</em>, <em>palette=None</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines geographic images. As such, it contains not only data
+of the different <em>channels</em> of the image, but also the area on which it is
+defined (<em>area_id</em> parameter) and <em>time_slot</em> of the snapshot.</p>
+<p>The channels are considered to contain floating point values in the range
+[0.0,1.0]. In order to normalize the input data, the <em>crange</em> parameter
+defines the original range of the data. The conversion to the classical
+[0,255] range and byte type is done automagically when saving the image to
+file.</p>
+<p>See also <tt class="xref docutils literal"><span class="pre">image.Image</span></tt> for more information.</p>
+<dl class="method">
+<dt id="imageo.geo_image.GeoImage.add_overlay">
+<tt class="descname">add_overlay</tt><big>(</big><em>color=(0</em>, <em>0</em>, <em>0)</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage.add_overlay" title="Permalink to this definition">¶</a></dt>
+<dd>Add coastline and political borders to image, using <em>color</em>.</dd></dl>
+
+<dl class="method">
+<dt id="imageo.geo_image.GeoImage.save">
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=0</em>, <em>tags=None</em>, <em>gdal_options=None</em><big>)</big><a class="headerlink" href="#imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
+<dd>Save the image to the given <em>filename</em>. If the extension is &#8220;tif&#8221;,
+the image is saved to <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, in which case the <em>compression</em>
+level can be given ([0, 9], 0 meaning off). See also
+<tt class="xref docutils literal"><span class="pre">image.Image.save()</span></tt>, <tt class="xref docutils literal"><span class="pre">image.Image.double_save()</span></tt>, and
+<tt class="xref docutils literal"><span class="pre">image.Image.secure_save()</span></tt>.  The <em>tags</em> argument is a dict of tags
+to include in the image (as metadata).</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Image"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li>
+          <li><a href="rs_images.html" >Images for remote sensing</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

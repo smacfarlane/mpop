@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Making use of mpop: the pp package &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Input plugins: the satin package" href="input.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input plugins: the satin package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Making use of mpop: the <tt class="docutils literal"><span class="pre">pp</span></tt> package</a><ul>
+<li><a class="reference external" href="#conventions-about-satellite-names">Conventions about satellite names</a></li>
+<li><a class="reference external" href="#creating-custom-images">Creating custom images</a></li>
+<li><a class="reference external" href="#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
+<li><a class="reference external" href="#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="quickstart.html"
+                                  title="previous chapter">Quickstart</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="input.html"
+                                  title="next chapter">Input plugins: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="sources/pp.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="making-use-of-mpop-the-pp-package">
+<h1>Making use of mpop: the <tt class="xref docutils literal"><span class="pre">pp</span></tt> package<a class="headerlink" href="#making-use-of-mpop-the-pp-package" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="xref docutils literal"><span class="pre">pp</span></tt> package is the heart of mpop: here are defined the core classes
+which the user will need to build satellite composites.</p>
+<div class="section" id="conventions-about-satellite-names">
+<h2>Conventions about satellite names<a class="headerlink" href="#conventions-about-satellite-names" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the document, we will use the following conventions:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><em>satellite name</em> will designate the name of the platform, e.g. &#8220;noaa&#8221; in</dt>
+<dd><p class="first last">satellite &#8220;noaa 19&#8221;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>satellite number</em> will refer to the number of the satellite in the series,</dt>
+<dd><p class="first last">e.g. &#8220;19&#8221; for satellite &#8220;noaa 19&#8221;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>variant</em> will be used to differentiate the same data (from the same</dt>
+<dd><p class="first last">satellite and instrument) coming in different flavours. For example, we use
+variant to distinguish data coming from the satellite metop 02 from direct
+readout, regional coverage or global coverage.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="creating-custom-images">
+<h2>Creating custom images<a class="headerlink" href="#creating-custom-images" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="adding-a-new-satellite-configuration-file">
+<h2>Adding a new satellite: configuration file<a class="headerlink" href="#adding-a-new-satellite-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>bli bli</p>
+</div>
+<div class="section" id="adding-a-new-satellite-python-code">
+<h2>Adding a new satellite: python code<a class="headerlink" href="#adding-a-new-satellite-python-code" title="Permalink to this headline">¶</a></h2>
+<p>blo blo</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input plugins: the satin package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Satellite and Instrument API &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Images for remote sensing" href="rs_images.html" />
+    <link rel="prev" title="Organization of the package" href="organization.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="rs_images.html" title="Images for remote sensing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="organization.html" title="Organization of the package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Satellite and Instrument API</a><ul>
+<li><a class="reference external" href="#module-pp.scene">The <tt class="docutils literal"><span class="pre">scene</span></tt> module</a></li>
+<li><a class="reference external" href="#module-pp.instruments.visir">The <tt class="docutils literal"><span class="pre">visir</span></tt> module</a></li>
+<li><a class="reference external" href="#module-pp.projector">Projecting: the <tt class="docutils literal"><span class="pre">projector</span></tt> module</a></li>
+<li><a class="reference external" href="#module-pp.instruments.seviri">The Seviri instrument</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="organization.html"
+                                  title="previous chapter">Organization of the package</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="rs_images.html"
+                                  title="next chapter">Images for remote sensing</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="sources/satellites_h.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="satellite-and-instrument-api">
+<h1>Satellite and Instrument API<a class="headerlink" href="#satellite-and-instrument-api" title="Permalink to this headline">¶</a></h1>
+<p>The satellite interface is the core of the postprocessing package.</p>
+<div class="section" id="module-pp.scene">
+<h2>The <tt class="xref docutils literal"><span class="pre">scene</span></tt> module<a class="headerlink" href="#module-pp.scene" title="Permalink to this headline">¶</a></h2>
+<p>This module defines satellite scenes. They are defined as generic classes,
+to be inherited when needed.</p>
+<p>A scene is a set of :mod:<a href="#id1"><span class="problematic" id="id2">`</span></a>pp.channel`s for a given time, and sometimes also for
+a given area.</p>
+<dl class="class">
+<dt id="pp.scene.SatelliteInstrumentScene">
+<em class="property">class </em><tt class="descclassname">pp.scene.</tt><tt class="descname">SatelliteInstrumentScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the satellite instrument class. It is an abstract channel
+container.</p>
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.check_channels">
+<tt class="descname">check_channels</tt><big>(</big><em>*channels</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.check_channels" title="Permalink to this definition">¶</a></dt>
+<dd>Check if the <em>channels</em> are loaded, raise an error otherwise.</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.get_lat_lon">
+<tt class="descname">get_lat_lon</tt><big>(</big><em>resolution</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.get_lat_lon" title="Permalink to this definition">¶</a></dt>
+<dd>Get the latitude and longitude grids of the current region for the
+given <em>resolution</em>.</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.load">
+<tt class="descname">load</tt><big>(</big><em>channels=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
+<dd>Load instrument data into the <em>channels</em>. <em>Channels</em> is a list or a
+tuple containing channels we will load data into. If None, all channels
+are loaded.</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.loaded_channels">
+<tt class="descname">loaded_channels</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.loaded_channels" title="Permalink to this definition">¶</a></dt>
+<dd>Return the set of loaded_channels.</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.project">
+<tt class="descname">project</tt><big>(</big><em>dest_area</em>, <em>channels=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of the current snapshot projected onto the
+<em>dest_area</em>. Available areas are defined in the region configuration
+file (ACPG). <em>channels</em> tells which channels are to be projected, and
+if None, all channels are projected and copied over to the return
+snapshot.</p>
+<p>Note: channels have to be loaded to be projected, otherwise an
+exception is raised.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pp.scene.SatelliteScene">
+<em class="property">class </em><tt class="descclassname">pp.scene.</tt><tt class="descname">SatelliteScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the satellite scene class. It is a capture of the satellite
+(channels) data at given <em>time_slot</em> and <em>area_id</em>/<em>area</em>.</p>
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area">
+<tt class="descname">area</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area" title="Permalink to this definition">¶</a></dt>
+<dd>Getter for area.</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area_def">
+<tt class="descname">area_def</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area_def" title="Permalink to this definition">¶</a></dt>
+<dd>Area on which the scene is defined.</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area_id">
+<tt class="descname">area_id</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area_id" title="Permalink to this definition">¶</a></dt>
+<dd>Name of the area on which the scene is defined.</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.fullname">
+<tt class="descname">fullname</tt><a class="headerlink" href="#pp.scene.SatelliteScene.fullname" title="Permalink to this definition">¶</a></dt>
+<dd>Full name of the satellite, that is platform name and number
+(eg&#8221;metop02&#8221;).</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteScene.get_area">
+<tt class="descname">get_area</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene.get_area" title="Permalink to this definition">¶</a></dt>
+<dd>Getter for area.</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.info">
+<tt class="descname">info</tt><a class="headerlink" href="#pp.scene.SatelliteScene.info" title="Permalink to this definition">¶</a></dt>
+<dd>Metadata information</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.number">
+<tt class="descname">number</tt><a class="headerlink" href="#pp.scene.SatelliteScene.number" title="Permalink to this definition">¶</a></dt>
+<dd>Number of the satellite</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.orbit">
+<tt class="descname">orbit</tt><a class="headerlink" href="#pp.scene.SatelliteScene.orbit" title="Permalink to this definition">¶</a></dt>
+<dd>Orbit number of the satellite</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.satname">
+<tt class="descname">satname</tt><a class="headerlink" href="#pp.scene.SatelliteScene.satname" title="Permalink to this definition">¶</a></dt>
+<dd>Name of the satellite</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteScene.set_area">
+<tt class="descname">set_area</tt><big>(</big><em>area</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene.set_area" title="Permalink to this definition">¶</a></dt>
+<dd>Setter for area.</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.time_slot">
+<tt class="descname">time_slot</tt><a class="headerlink" href="#pp.scene.SatelliteScene.time_slot" title="Permalink to this definition">¶</a></dt>
+<dd>Time of the snapshot</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.variant">
+<tt class="descname">variant</tt><a class="headerlink" href="#pp.scene.SatelliteScene.variant" title="Permalink to this definition">¶</a></dt>
+<dd>Variant of the satellite (often the communication channel it comes from)</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pp.scene.assemble_swaths">
+<tt class="descclassname">pp.scene.</tt><tt class="descname">assemble_swaths</tt><big>(</big><em>swath_list</em><big>)</big><a class="headerlink" href="#pp.scene.assemble_swaths" title="Permalink to this definition">¶</a></dt>
+<dd>Assemble the scene objects listed in <em>swath_list</em> into one.</dd></dl>
+
+</div>
+<div class="section" id="module-pp.instruments.visir">
+<h2>The <tt class="xref docutils literal"><span class="pre">visir</span></tt> module<a class="headerlink" href="#module-pp.instruments.visir" title="Permalink to this headline">¶</a></h2>
+<p>This module defines the generic VISIR instrument class.</p>
+<dl class="class">
+<dt id="pp.instruments.visir.VisirScene">
+<em class="property">class </em><tt class="descclassname">pp.instruments.visir.</tt><tt class="descname">VisirScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic RGB building methods for VISIR instruments.</p>
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.airmass">
+<tt class="descname">airmass</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.airmass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an airmass RGB image composite.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Channels</th>
+<th class="head">Temp</th>
+<th class="head">Gamma</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>WV6.2 - WV7.3</td>
+<td>-25 to 0 K</td>
+<td>gamma 1</td>
+</tr>
+<tr><td>IR9.7 - IR10.8</td>
+<td>-40 to 5 K</td>
+<td>gamma 1</td>
+</tr>
+<tr><td>WV6.2</td>
+<td>243 to 208 K</td>
+<td>gamma 1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.ash">
+<tt class="descname">ash</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ash" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Ash RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.channel_image">
+<tt class="descname">channel_image</tt><big>(</big><em>channel</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
+<dd>Make a black and white image of the <em>channel</em>.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.cloudtop">
+<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.cloudtop" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Cloudtop RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.convection">
+<tt class="descname">convection</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.convection" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Severe Convection RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.dust">
+<tt class="descname">dust</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.dust" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Dust RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.fog">
+<tt class="descname">fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.fog" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Fog RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.green_snow">
+<tt class="descname">green_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.green_snow" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Green Snow RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.ir108">
+<tt class="descname">ir108</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ir108" title="Permalink to this definition">¶</a></dt>
+<dd>Make a black and white image of the IR 10.8um channel.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.natural">
+<tt class="descname">natural</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.natural" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Natural Colors RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.night_fog">
+<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.night_fog" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Night Fog RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.overview">
+<tt class="descname">overview</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.overview" title="Permalink to this definition">¶</a></dt>
+<dd>Make an overview RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.red_snow">
+<tt class="descname">red_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.red_snow" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Red Snow RGB image composite.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.vis06">
+<tt class="descname">vis06</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.vis06" title="Permalink to this definition">¶</a></dt>
+<dd>Make a black and white image of the VIS 0.635um channel.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.wv_high">
+<tt class="descname">wv_high</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_high" title="Permalink to this definition">¶</a></dt>
+<dd>Make a black and white image of the IR 6.7um channel.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.wv_low">
+<tt class="descname">wv_low</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_low" title="Permalink to this definition">¶</a></dt>
+<dd>Make a black and white image of the IR 7.3um channel.</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.projector">
+<h2>Projecting: the <tt class="xref docutils literal"><span class="pre">projector</span></tt> module<a class="headerlink" href="#module-pp.projector" title="Permalink to this headline">¶</a></h2>
+<p>This module handles coverage objects. Such objects are used to
+transform area projected data by changing either the area or the
+projection or both. A typical usage is to transform one large area in
+satellite projection to an area of interest in polar projection for
+example.</p>
+<dl class="class">
+<dt id="pp.projector.Projector">
+<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area_id</em>, <em>out_area_id</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class define projector objects. They contain the mapping
+information necessary for projection purposes. For efficiency reasons,
+generated projectors are saved to disk for later reuse. The <em>recompute</em>
+flag can be used to regenerate the saved projector arrays.</p>
+<dl class="method">
+<dt id="pp.projector.Projector.project_array">
+<tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
+<dd>Project an array <em>data</em> along the given Projector object.</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.instruments.seviri">
+<h2>The Seviri instrument<a class="headerlink" href="#module-pp.instruments.seviri" title="Permalink to this headline">¶</a></h2>
+<p>This modules describes the seviri instrument.</p>
+<dl class="class">
+<dt id="pp.instruments.seviri.SeviriScene">
+<em class="property">class </em><tt class="descclassname">pp.instruments.seviri.</tt><tt class="descname">SeviriScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class sets up the Seviri instrument channel list.</p>
+<dl class="method">
+<dt id="pp.instruments.seviri.SeviriScene.cloudtop">
+<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.cloudtop" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Cloudtop RGB image composite from Seviri channels.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.seviri.SeviriScene.co2corr">
+<tt class="descname">co2corr</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.co2corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>CO2 correction of the brightness temperature of the MSG 3.9um
+channel:</p>
+<div class="highlight-python"><pre>.. math::</pre>
+</div>
+<blockquote>
+T4_CO2corr = (BT(IR3.9)^4 + Rcorr)^0.25
+Rcorr = BT(IR10.8)^4 - (BT(IR10.8)-dt_CO2)^4
+dt_CO2 = (BT(IR10.8)-BT(IR13.4))/4.0</blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.seviri.SeviriScene.hr_overview">
+<tt class="descname">hr_overview</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.hr_overview" title="Permalink to this definition">¶</a></dt>
+<dd>Make a High Resolution Overview RGB image composite from Seviri
+channels.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.seviri.SeviriScene.hr_visual">
+<tt class="descname">hr_visual</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.hr_visual" title="Permalink to this definition">¶</a></dt>
+<dd>Make a High Resolution visual BW image composite from Seviri
+channels.</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.seviri.SeviriScene.night_fog">
+<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.night_fog" title="Permalink to this definition">¶</a></dt>
+<dd>Make a Night Fog RGB image composite from Seviri channels.</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="rs_images.html" title="Images for remote sensing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="organization.html" title="Organization of the package"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>
