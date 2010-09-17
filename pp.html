@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,12 +14,13 @@
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
         VERSION:     '0.9.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
     <link rel="next" title="Input plugins: the satin package" href="input.html" />
@@ -31,8 +34,8 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="input.html" title="Input plugins: the satin package"
              accesskey="N">next</a> |</li>
@@ -44,41 +47,51 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="">Making use of mpop: the <tt class="docutils literal"><span class="pre">pp</span></tt> package</a><ul>
-<li><a class="reference external" href="#conventions-about-satellite-names">Conventions about satellite names</a></li>
-<li><a class="reference external" href="#creating-custom-images">Creating custom images</a></li>
-<li><a class="reference external" href="#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
-<li><a class="reference external" href="#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Making use of mpop: the <tt class="docutils literal"><span class="pre">pp</span></tt> package</a><ul>
+<li><a class="reference internal" href="#conventions-about-satellite-names">Conventions about satellite names</a></li>
+<li><a class="reference internal" href="#creating-a-scene-object">Creating a scene object</a></li>
+<li><a class="reference internal" href="#loading-the-data">Loading the data</a></li>
+<li><a class="reference internal" href="#image-composites">Image composites</a></li>
+<li><a class="reference internal" href="#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
+<li><a class="reference internal" href="#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
+<li><a class="reference internal" href="#the-pp-api">The <tt class="docutils literal"><span class="pre">pp</span></tt> API</a><ul>
+<li><a class="reference internal" href="#module-pp.scene">Satellite scenes</a></li>
+<li><a class="reference internal" href="#module-pp.channel">Instrument channels</a></li>
+<li><a class="reference internal" href="#module-pp.instruments.visir">The VisIr instrument class</a></li>
+<li><a class="reference internal" href="#module-pp.projector">Projection facility</a></li>
+<li><a class="reference internal" href="#module-pp.satellites">Satellite class loader</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="quickstart.html"
-                                  title="previous chapter">Quickstart</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="input.html"
-                                  title="next chapter">Input plugins: the <tt class="docutils literal"><span class="pre">satin</span></tt> package</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="sources/pp.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="previous chapter">Quickstart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="input.html"
+                        title="next chapter">Input plugins: the <tt class="docutils literal"><span class="pre">satin</span></tt> package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/pp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -88,9 +101,9 @@
           <div class="body">
             
   <div class="section" id="making-use-of-mpop-the-pp-package">
-<h1>Making use of mpop: the <tt class="xref docutils literal"><span class="pre">pp</span></tt> package<a class="headerlink" href="#making-use-of-mpop-the-pp-package" title="Permalink to this headline">¶</a></h1>
-<p>The <tt class="xref docutils literal"><span class="pre">pp</span></tt> package is the heart of mpop: here are defined the core classes
-which the user will need to build satellite composites.</p>
+<h1>Making use of mpop: the <tt class="xref py py-mod docutils literal"><span class="pre">pp</span></tt> package<a class="headerlink" href="#making-use-of-mpop-the-pp-package" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="xref py py-mod docutils literal"><span class="pre">pp</span></tt> package is the heart of mpop: here are defined the core classes
+which the user will then need to build satellite composites.</p>
 <div class="section" id="conventions-about-satellite-names">
 <h2>Conventions about satellite names<a class="headerlink" href="#conventions-about-satellite-names" title="Permalink to this headline">¶</a></h2>
 <p>Throughout the document, we will use the following conventions:</p>
@@ -117,14 +130,864 @@ readout, regional coverage or global coverage.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="creating-custom-images">
-<h2>Creating custom images<a class="headerlink" href="#creating-custom-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-scene-object">
+<h2>Creating a scene object<a class="headerlink" href="#creating-a-scene-object" title="Permalink to this headline">¶</a></h2>
+<p>Creating a scene object can be done in two ways: call the constructor of the
+class you want to use directly (for example
+<tt class="xref py py-meth docutils literal"><span class="pre">pp.satellites.Meteosat09SeviriScene()</span></tt>) or use the
+<a class="reference internal" href="#pp.satellites.get_satellite_class" title="pp.satellites.get_satellite_class"><tt class="xref py py-func docutils literal"><span class="pre">pp.satellites.get_satellite_class()</span></tt></a> function first to retrieve the class,
+from which to call the constructor. The latter is recommended, since it is
+easier to use than checking out the name of a given class, but it also calling
+the <a class="reference internal" href="#pp.satellites.build_satellite_class" title="pp.satellites.build_satellite_class"><tt class="xref py py-func docutils literal"><span class="pre">pp.satellites.build_satellite_class()</span></tt></a> function to build a new
+satellite class on the fly from configuration files if they exist.</p>
+<p>The reader is refered to the documentation of the
+<a class="reference internal" href="#pp.scene.SatelliteInstrumentScene" title="pp.scene.SatelliteInstrumentScene"><tt class="xref py py-meth docutils literal"><span class="pre">pp.scene.SatelliteInstrumentScene()</span></tt></a> for a description of the input
+arguments.</p>
+<p>Such a scene object is roughly a container for <a class="reference internal" href="#pp.channel.Channel" title="pp.channel.Channel"><tt class="xref py py-class docutils literal"><span class="pre">pp.channel.Channel</span></tt></a>
+objects, which hold the actual data and information for each band.</p>
+</div>
+<div class="section" id="loading-the-data">
+<h2>Loading the data<a class="headerlink" href="#loading-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Loading the data is done through the
+<a class="reference internal" href="#pp.scene.SatelliteInstrumentScene.load" title="pp.scene.SatelliteInstrumentScene.load"><tt class="xref py py-meth docutils literal"><span class="pre">pp.scene.SatelliteInstrumentScene.load()</span></tt></a> method. Calling it effectively
+loads the data from disk into memory, so it can take a while depending on the
+volume of data to load and the performance of the host computer. The channels
+listed as arguments become loaded, and cannot be reloaded: a subsequent call to
+the method will not reload the data from disk.</p>
+</div>
+<div class="section" id="image-composites">
+<h2>Image composites<a class="headerlink" href="#image-composites" title="Permalink to this headline">¶</a></h2>
+<p>Methods building image composites are distributed in different modules, taking
+advantage of the hierarchical structure offered by OOP.</p>
+<p>The image composites common to all visir instruments are defined in the
+<a class="reference internal" href="#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
+<tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.avhrr</span></tt> or <a class="reference internal" href="satellites_h.html#module-pp.instruments.seviri" title="pp.instruments.seviri"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.seviri</span></tt></a> overload these
+methods to adapt better for the instrument at hand.</p>
+<p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Image</em></a>.</p>
 </div>
 <div class="section" id="adding-a-new-satellite-configuration-file">
 <h2>Adding a new satellite: configuration file<a class="headerlink" href="#adding-a-new-satellite-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>A satellite configuration file looks like the following (here meteosat 7, mviri
+instrument):</p>
+<div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#</span>
+<span class="c"># Level 1.5 configuration file for Meteosat-7</span>
+<span class="c">#</span>
+<span class="c"># An item like:</span>
+<span class="c">#   name = value</span>
+<span class="c"># is read in python like:</span>
+<span class="c">#   try:</span>
+<span class="c">#       name = eval(value)</span>
+<span class="c">#   except NameError:</span>
+<span class="c">#       name = str(value)</span>
+<span class="c">#</span>
+
+<span class="k">[satellite]</span>
+<span class="na">satname</span> <span class="o">=</span> <span class="s">&#39;meteosat&#39;</span>
+<span class="na">number</span> <span class="o">=</span> <span class="s">&#39;07&#39;</span>
+<span class="na">instruments</span> <span class="o">=</span> <span class="s">(&#39;mviri&#39;,)</span>
+<span class="na">projection</span> <span class="o">=</span> <span class="s">&#39;geos(57.0)&#39;</span>
+
+<span class="k">[mviri-level2]</span>
+<span class="na">format</span> <span class="o">=</span> <span class="s">&#39;mipp&#39;</span>
+
+<span class="k">[mviri-level1]</span>
+<span class="na">format</span> <span class="o">=</span> <span class="s">&#39;xrit/MTP&#39;</span>
+<span class="na">dir</span> <span class="o">=</span> <span class="s">&#39;/data/prod/satellit/meteosat7&#39;</span>
+<span class="na">filename</span> <span class="o">=</span> <span class="s">&#39;L-000-MTP___-MET7________-%(channel)s_057E-%(segment)s-%Y%m%d%H%M-__&#39;</span>
+
+<span class="k">[mviri-1]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&#39;00_7&#39;</span>
+<span class="na">frequency</span> <span class="o">=</span> <span class="s">(0.5, 0.7, 0.9)</span>
+<span class="na">resolution</span> <span class="o">=</span> <span class="s">2248.49</span>
+<span class="na">size</span> <span class="o">=</span> <span class="s">(5000, 5000)</span>
+
+<span class="k">[mviri-2]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&#39;06_4&#39;</span>
+<span class="na">frequency</span> <span class="o">=</span> <span class="s">(5.7, 6.4, 7.1)</span>
+<span class="na">resolution</span> <span class="o">=</span> <span class="s">4496.98</span>
+<span class="na">size</span> <span class="o">=</span> <span class="s">(2500, 2500)</span>
+
+<span class="k">[mviri-3]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&#39;11_5&#39;</span>
+<span class="na">frequency</span> <span class="o">=</span> <span class="s">(10.5, 11.5, 12.5)</span>
+<span class="na">resolution</span> <span class="o">=</span> <span class="s">4496.98</span>
+<span class="na">size</span> <span class="o">=</span> <span class="s">(2500, 2500)</span>
+</pre></div>
+</td></tr></table></div>
+<p>The configuration file must hold a <cite>satellite</cite> section, the list of channels
+for the needed instruments (here <cite>mviri-n</cite> sections), and how to read the
+data in mipp (<cite>mviri-level1</cite>) and how to read it in mpop (<cite>mviri-level2</cite>).</p>
+<p>Using this template we can define new satellite and instruments.</p>
 </div>
 <div class="section" id="adding-a-new-satellite-python-code">
 <h2>Adding a new satellite: python code<a class="headerlink" href="#adding-a-new-satellite-python-code" title="Permalink to this headline">¶</a></h2>
+<p>Another way of adding satellites and instruments to mpop is to write the
+correponding python code.</p>
+<p>Here are example of such code:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># Copyright (c) 2010.</span>
+
+<span class="c"># SMHI,</span>
+<span class="c"># Folkborgsvägen 1,</span>
+<span class="c"># Norrköping, </span>
+<span class="c"># Sweden</span>
+
+<span class="c"># Author(s):</span>
+ 
+<span class="c">#   Martin Raspaud &lt;martin.raspaud@smhi.se&gt;</span>
+
+<span class="c"># This file is part of mpop.</span>
+
+<span class="c"># mpop is free software: you can redistribute it and/or modify it under the</span>
+<span class="c"># terms of the GNU General Public License as published by the Free Software</span>
+<span class="c"># Foundation, either version 3 of the License, or (at your option) any later</span>
+<span class="c"># version.</span>
+
+<span class="c"># mpop is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<span class="c"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
+<span class="c"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+
+<span class="c"># You should have received a copy of the GNU General Public License along with</span>
+<span class="c"># mpop.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;This modules describes the mviri instrument.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pp.instruments.visir</span> <span class="kn">import</span> <span class="n">VisirScene</span>
+<span class="kn">from</span> <span class="nn">imageo</span> <span class="kn">import</span> <span class="n">geo_image</span>
+
+<span class="n">MVIRI</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;00_7&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="mi">2500</span><span class="p">],</span>
+         <span class="p">[</span><span class="s">&quot;06_4&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">5.7</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">),</span> <span class="mi">5000</span><span class="p">],</span>
+         <span class="p">[</span><span class="s">&quot;11_5&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">),</span> <span class="mi">5000</span><span class="p">]]</span>
+
+<span class="k">class</span> <span class="nc">MviriScene</span><span class="p">(</span><span class="n">VisirScene</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class sets up the Seviri instrument channel list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">channel_list</span> <span class="o">=</span> <span class="n">MVIRI</span>
+    <span class="n">instrument_name</span> <span class="o">=</span> <span class="s">&quot;mviri&quot;</span>
+    
+
+    <span class="k">def</span> <span class="nf">overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make an overview RGB image composite.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_channels</span><span class="p">(</span><span class="mf">0.635</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">)</span>
+
+        <span class="n">ch1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="mf">0.635</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">ch2</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="mf">0.85</span><span class="p">]</span><span class="o">.</span><span class="n">check_range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">ch3</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="p">[</span><span class="mf">10.8</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+        
+        <span class="n">img</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">((</span><span class="n">ch1</span><span class="p">,</span> <span class="n">ch2</span><span class="p">,</span> <span class="n">ch3</span><span class="p">),</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
+                                 <span class="n">fill_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                 <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;RGB&quot;</span><span class="p">)</span>
+        
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="s">&quot;crude&quot;</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span>
+    
+    <span class="n">overview</span><span class="o">.</span><span class="n">prerequisites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mf">0.635</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">ir108</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make a black and white image of the IR 10.8um channel.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_channels</span><span class="p">(</span><span class="mf">10.8</span><span class="p">)</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mf">10.8</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
+                                 <span class="n">fill_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;L&quot;</span><span class="p">)</span>
+        
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">inverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="s">&quot;crude&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span>
+
+    <span class="n">ir108</span><span class="o">.</span><span class="n">prerequisites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mf">10.8</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># Copyright (c) 2010.</span>
+
+<span class="c"># SMHI,</span>
+<span class="c"># Folkborgsvägen 1,</span>
+<span class="c"># Norrköping, </span>
+<span class="c"># Sweden</span>
+
+<span class="c"># Author(s):</span>
+ 
+<span class="c">#   Martin Raspaud &lt;martin.raspaud@smhi.se&gt;</span>
+
+<span class="c"># This file is part of mpop.</span>
+
+<span class="c"># mpop is free software: you can redistribute it and/or modify it under the</span>
+<span class="c"># terms of the GNU General Public License as published by the Free Software</span>
+<span class="c"># Foundation, either version 3 of the License, or (at your option) any later</span>
+<span class="c"># version.</span>
+
+<span class="c"># mpop is distributed in the hope that it will be useful, but WITHOUT ANY</span>
+<span class="c"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
+<span class="c"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+
+<span class="c"># You should have received a copy of the GNU General Public License along with</span>
+<span class="c"># mpop.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;This module is the loader for Meteosat07 scenes.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pp.instruments.mviri</span> <span class="kn">import</span> <span class="n">MviriScene</span>
+
+<span class="k">class</span> <span class="nc">Meteosat07MviriScene</span><span class="p">(</span><span class="n">MviriScene</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class implements Meteosat07 scenes as captured by the Mviri</span>
+<span class="sd">    instrument. It&#39;s constructor accepts the same arguments as</span>
+<span class="sd">    :class:`pp.instruments.mviri.MviriScene`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">satname</span> <span class="o">=</span> <span class="s">&quot;meteosat&quot;</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="s">&quot;07&quot;</span>
+    
+        
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="the-pp-api">
+<h2>The <tt class="xref py py-mod docutils literal"><span class="pre">pp</span></tt> API<a class="headerlink" href="#the-pp-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pp.scene">
+<span id="satellite-scenes"></span><h3>Satellite scenes<a class="headerlink" href="#module-pp.scene" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="#module-pp.scene" title="pp.scene"><tt class="xref py py-mod docutils literal"><span class="pre">pp.scene</span></tt></a> module defines satellite scenes. They are defined as generic
+classes, to be inherited when needed.</p>
+<p>A scene is a set of <a class="reference internal" href="#module-pp.channel" title="pp.channel"><tt class="xref py py-mod docutils literal"><span class="pre">pp.channel</span></tt></a> objects for a given time, and sometimes
+also for a given area.</p>
+<dl class="class">
+<dt id="pp.scene.SatelliteInstrumentScene">
+<em class="property">class </em><tt class="descclassname">pp.scene.</tt><tt class="descname">SatelliteInstrumentScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the satellite instrument class. It is an abstract channel
+container, from which all concrete satellite scenes should be derived.</p>
+<p>The constructor accepts as optional arguments the <em>time_slot</em> of the scene,
+the <em>area</em> on which the scene is defined (this can be use for slicing of
+big datasets, or can be set automatically when loading), and <em>orbit</em> which
+is a string giving the orbit number.</p>
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.check_channels">
+<tt class="descname">check_channels</tt><big>(</big><em>*channels</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.check_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the <em>channels</em> are loaded, raise an error otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.get_lat_lon">
+<tt class="descname">get_lat_lon</tt><big>(</big><em>resolution</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.get_lat_lon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the latitude and longitude grids of the current region for the
+given <em>resolution</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.load">
+<tt class="descname">load</tt><big>(</big><em>channels=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load instrument data into the <em>channels</em>. <em>Channels</em> is a list or a
+tuple containing channels we will load data into, designated by there
+center wavelength (float), resolution (integer) or name (string). If
+None, all channels are loaded.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.loaded_channels">
+<tt class="descname">loaded_channels</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.loaded_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the set of loaded_channels.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.project">
+<tt class="descname">project</tt><big>(</big><em>dest_area</em>, <em>channels=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of the current snapshot projected onto the
+<em>dest_area</em>. Available areas are defined in the region configuration
+file (ACPG). <em>channels</em> tells which channels are to be projected, and
+if None, all channels are projected and copied over to the return
+snapshot.</p>
+<p>Note: channels have to be loaded to be projected, otherwise an
+exception is raised.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pp.scene.SatelliteScene">
+<em class="property">class </em><tt class="descclassname">pp.scene.</tt><tt class="descname">SatelliteScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the satellite scene class. It is a capture of the satellite
+(channels) data at given <em>time_slot</em> and <em>area_id</em>/<em>area</em>.</p>
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area">
+<tt class="descname">area</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area_def">
+<tt class="descname">area_def</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Area on which the scene is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.area_id">
+<tt class="descname">area_id</tt><a class="headerlink" href="#pp.scene.SatelliteScene.area_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the area on which the scene is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.fullname">
+<tt class="descname">fullname</tt><a class="headerlink" href="#pp.scene.SatelliteScene.fullname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Full name of the satellite, that is platform name and number
+(eg&#8221;metop02&#8221;).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteScene.get_area">
+<tt class="descname">get_area</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene.get_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.info">
+<tt class="descname">info</tt><a class="headerlink" href="#pp.scene.SatelliteScene.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metadata information</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.number">
+<tt class="descname">number</tt><a class="headerlink" href="#pp.scene.SatelliteScene.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of the satellite</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.orbit">
+<tt class="descname">orbit</tt><a class="headerlink" href="#pp.scene.SatelliteScene.orbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Orbit number of the satellite</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.satname">
+<tt class="descname">satname</tt><a class="headerlink" href="#pp.scene.SatelliteScene.satname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the satellite</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteScene.set_area">
+<tt class="descname">set_area</tt><big>(</big><em>area</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteScene.set_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.time_slot">
+<tt class="descname">time_slot</tt><a class="headerlink" href="#pp.scene.SatelliteScene.time_slot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time of the snapshot</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.scene.SatelliteScene.variant">
+<tt class="descname">variant</tt><a class="headerlink" href="#pp.scene.SatelliteScene.variant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variant of the satellite (often the communication channel it comes from)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pp.scene.assemble_swaths">
+<tt class="descclassname">pp.scene.</tt><tt class="descname">assemble_swaths</tt><big>(</big><em>swath_list</em><big>)</big><a class="headerlink" href="#pp.scene.assemble_swaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the scene objects listed in <em>swath_list</em> and returns the
+resulting scene object.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.channel">
+<span id="instrument-channels"></span><h3>Instrument channels<a class="headerlink" href="#module-pp.channel" title="Permalink to this headline">¶</a></h3>
+<p>This module defines satellite instrument channels as a generic class, to be
+inherited when needed.</p>
+<dl class="class">
+<dt id="pp.channel.Channel">
+<em class="property">class </em><tt class="descclassname">pp.channel.</tt><tt class="descname">Channel</tt><big>(</big><em>name=None</em>, <em>resolution=0</em>, <em>wavelength_range=(-inf</em>, <em>-inf</em>, <em>-inf)</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#pp.channel.Channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the satellite channel class. It defines satellite channels as a
+container for calibrated channel data.</p>
+<p>The <em>resolution</em> sets the resolution of the channel, in meters. The
+<em>wavelength_range</em> is a triplet, containing the lowest-, center-, and
+highest-wavelength values of the channel. <em>name</em> is simply the given name
+of the channel, and <em>data</em> is the data it should hold.</p>
+<dl class="method">
+<dt id="pp.channel.Channel.check_range">
+<tt class="descname">check_range</tt><big>(</big><em>min_range=1.0</em><big>)</big><a class="headerlink" href="#pp.channel.Channel.check_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the data of the channels has a definition domain broader
+than <em>min_range</em> and return the data, otherwise return zeros.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.Channel.data">
+<tt class="descname">data</tt><a class="headerlink" href="#pp.channel.Channel.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for channel data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.Channel.get_data">
+<tt class="descname">get_data</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.channel.Channel.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for channel data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.Channel.is_loaded">
+<tt class="descname">is_loaded</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.channel.Channel.is_loaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells if the channel contains loaded data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.Channel.project">
+<tt class="descname">project</tt><big>(</big><em>coverage_instance</em><big>)</big><a class="headerlink" href="#pp.channel.Channel.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a projected copy of the current channel using the given
+<em>coverage_instance</em>.</p>
+<p>See also the <tt class="xref py py-mod docutils literal"><span class="pre">pp.coverage</span></tt> module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.Channel.set_data">
+<tt class="descname">set_data</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.channel.Channel.set_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for channel data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.Channel.shape">
+<tt class="descname">shape</tt><a class="headerlink" href="#pp.channel.Channel.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape of the channel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.Channel.show">
+<tt class="descname">show</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.channel.Channel.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the channel as an image.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.Channel.wavelength_range">
+<tt class="descname">wavelength_range</tt><a class="headerlink" href="#pp.channel.Channel.wavelength_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operationnal wavelength range of the channel, in micrometers.
+This is a triplet containing min-, central-, and max-wavelength.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pp.channel.GenericChannel">
+<em class="property">class </em><tt class="descclassname">pp.channel.</tt><tt class="descname">GenericChannel</tt><big>(</big><em>name=None</em><big>)</big><a class="headerlink" href="#pp.channel.GenericChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is an abstract channel class. It can be a super class for
+calibrated channels data or more elaborate channels such as cloudtype or
+CTTH.</p>
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.area">
+<tt class="descname">area</tt><a class="headerlink" href="#pp.channel.GenericChannel.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.area_def">
+<tt class="descname">area_def</tt><a class="headerlink" href="#pp.channel.GenericChannel.area_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Area on which the channel is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.area_id">
+<tt class="descname">area_id</tt><a class="headerlink" href="#pp.channel.GenericChannel.area_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the area on which the channel is defined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.GenericChannel.get_area">
+<tt class="descname">get_area</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.channel.GenericChannel.get_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for area.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.info">
+<tt class="descname">info</tt><a class="headerlink" href="#pp.channel.GenericChannel.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metadata information</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.name">
+<tt class="descname">name</tt><a class="headerlink" href="#pp.channel.GenericChannel.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the channel.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pp.channel.GenericChannel.resolution">
+<tt class="descname">resolution</tt><a class="headerlink" href="#pp.channel.GenericChannel.resolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Channel resolution, in meters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.channel.GenericChannel.set_area">
+<tt class="descname">set_area</tt><big>(</big><em>area</em><big>)</big><a class="headerlink" href="#pp.channel.GenericChannel.set_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for area.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="pp.channel.NotLoadedError">
+<em class="property">exception </em><tt class="descclassname">pp.channel.</tt><tt class="descname">NotLoadedError</tt><a class="headerlink" href="#pp.channel.NotLoadedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception to be raised when attempting to use a non-loaded channel.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.instruments.visir">
+<span id="the-visir-instrument-class"></span><h3>The VisIr instrument class<a class="headerlink" href="#module-pp.instruments.visir" title="Permalink to this headline">¶</a></h3>
+<p>This module defines the generic VISIR instrument class.</p>
+<dl class="class">
+<dt id="pp.instruments.visir.VisirScene">
+<em class="property">class </em><tt class="descclassname">pp.instruments.visir.</tt><tt class="descname">VisirScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic RGB building methods for VISIR instruments.</p>
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.airmass">
+<tt class="descname">airmass</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.airmass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an airmass RGB image composite.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Channels</th>
+<th class="head">Temp</th>
+<th class="head">Gamma</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>WV6.2 - WV7.3</td>
+<td>-25 to 0 K</td>
+<td>gamma 1</td>
+</tr>
+<tr><td>IR9.7 - IR10.8</td>
+<td>-40 to 5 K</td>
+<td>gamma 1</td>
+</tr>
+<tr><td>WV6.2</td>
+<td>243 to 208 K</td>
+<td>gamma 1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.ash">
+<tt class="descname">ash</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Ash RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.channel_image">
+<tt class="descname">channel_image</tt><big>(</big><em>channel</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a black and white image of the <em>channel</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.cloudtop">
+<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.cloudtop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Cloudtop RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.convection">
+<tt class="descname">convection</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.convection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Severe Convection RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.dust">
+<tt class="descname">dust</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.dust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Dust RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.fog">
+<tt class="descname">fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.fog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Fog RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.green_snow">
+<tt class="descname">green_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.green_snow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Green Snow RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.ir108">
+<tt class="descname">ir108</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ir108" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a black and white image of the IR 10.8um channel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.natural">
+<tt class="descname">natural</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.natural" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Natural Colors RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.night_fog">
+<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.night_fog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Night Fog RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.overview">
+<tt class="descname">overview</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an overview RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.red_snow">
+<tt class="descname">red_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.red_snow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Red Snow RGB image composite.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.vis06">
+<tt class="descname">vis06</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.vis06" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a black and white image of the VIS 0.635um channel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.wv_high">
+<tt class="descname">wv_high</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_high" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a black and white image of the IR 6.7um channel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.instruments.visir.VisirScene.wv_low">
+<tt class="descname">wv_low</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_low" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a black and white image of the IR 7.3um channel.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.projector">
+<span id="projection-facility"></span><h3>Projection facility<a class="headerlink" href="#module-pp.projector" title="Permalink to this headline">¶</a></h3>
+<p>This module handles coverage objects. Such objects are used to
+transform area projected data by changing either the area or the
+projection or both. A typical usage is to transform one large area in
+satellite projection to an area of interest in polar projection for
+example.</p>
+<dl class="class">
+<dt id="pp.projector.Projector">
+<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area_id</em>, <em>out_area_id</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class define projector objects. They contain the mapping
+information necessary for projection purposes. For efficiency reasons,
+generated projectors are saved to disk for later reuse. The <em>recompute</em>
+flag can be used to regenerate the saved projector arrays.</p>
+<dl class="method">
+<dt id="pp.projector.Projector.project_array">
+<tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project an array <em>data</em> along the given Projector object.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pp.satellites">
+<span id="satellite-class-loader"></span><h3>Satellite class loader<a class="headerlink" href="#module-pp.satellites" title="Permalink to this headline">¶</a></h3>
+<p>Load relevant modules.</p>
+<dl class="function">
+<dt id="pp.satellites.build_instrument">
+<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_instrument</tt><big>(</big><em>name</em>, <em>channels</em><big>)</big><a class="headerlink" href="#pp.satellites.build_instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically generate an instrument class from its <em>name</em> and
+<em>channels</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pp.satellites.build_satellite_class">
+<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_satellite_class</tt><big>(</big><em>satellite</em>, <em>num</em>, <em>var=''</em><big>)</big><a class="headerlink" href="#pp.satellites.build_satellite_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a class for the given satellite (defined by the three strings
+<em>satellite</em>, <em>num</em>, and <em>var</em>) on the fly, using a config file. The
+function returns as many classes as there are instruments defined in the
+configuration files. They inherit from the corresponding instrument class,
+which is also created on the fly is no predefined module for this
+instrument is available.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pp.satellites.get_satellite_class">
+<tt class="descclassname">pp.satellites.</tt><tt class="descname">get_satellite_class</tt><big>(</big><em>satellite</em>, <em>number</em>, <em>variant=''</em><big>)</big><a class="headerlink" href="#pp.satellites.get_satellite_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the class for a given satellite, defined by the three strings
+<em>satellite</em>, <em>number</em>, and <em>variant</em>. If no class is found, an attempt is
+made to build the class from a corresponding configuration file.</p>
+</dd></dl>
+
+</div>
 </div>
 </div>
 
@@ -141,7 +1004,7 @@ readout, regional coverage or global coverage.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="input.html" title="Input plugins: the satin package"
@@ -153,8 +1016,8 @@ readout, regional coverage or global coverage.</p>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, SMHI.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
     </div>
   </body>
 </html>

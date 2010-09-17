@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,12 +14,13 @@
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
         VERSION:     '0.9.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
     <link rel="up" title="Images for remote sensing" href="rs_images.html" />
@@ -32,8 +35,8 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="geo_image.html" title="Geographical images: geo_image"
              accesskey="N">next</a> |</li>
@@ -46,30 +49,30 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="rs_images.html"
-                                  title="previous chapter">Images for remote sensing</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="geo_image.html"
-                                  title="next chapter">Geographical images: <tt class="docutils literal docutils literal"><span class="pre">geo_image</span></tt></a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="sources/image.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="rs_images.html"
+                        title="previous chapter">Images for remote sensing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="geo_image.html"
+                        title="next chapter">Geographical images: <tt class="docutils literal"><span class="pre">geo_image</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/image.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -79,7 +82,7 @@
           <div class="body">
             
   <div class="section" id="module-imageo.image">
-<h1>Image<a class="headerlink" href="#module-imageo.image" title="Permalink to this headline">¶</a></h1>
+<span id="image"></span><span id="geographic-images"></span><h1>Image<a class="headerlink" href="#module-imageo.image" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the image class. It overlaps largely the PIL library,
 but has the advandage of using masked arrays as pixel arrays, so that data
 arrays containing invalid values may be properly handled.</p>
@@ -105,148 +108,171 @@ image to file.</p>
 <dl class="method">
 <dt id="imageo.image.Image.clip">
 <tt class="descname">clip</tt><big>(</big><em>channels=True</em><big>)</big><a class="headerlink" href="#imageo.image.Image.clip" title="Permalink to this definition">¶</a></dt>
-<dd>Limit the values of the array to the default [0,1] range. <em>channels</em>
-says which channels should be clipped.</dd></dl>
+<dd><p>Limit the values of the array to the default [0,1] range. <em>channels</em>
+says which channels should be clipped.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.convert">
 <tt class="descname">convert</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#imageo.image.Image.convert" title="Permalink to this definition">¶</a></dt>
-<dd>Convert the current image to the given <em>mode</em>. See <a title="imageo.image.Image" class="reference internal" href="#imageo.image.Image"><tt class="xref docutils literal"><span class="pre">Image</span></tt></a>
-for a list of available modes.</dd></dl>
+<dd><p>Convert the current image to the given <em>mode</em>. See <a class="reference internal" href="#imageo.image.Image" title="imageo.image.Image"><tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt></a>
+for a list of available modes.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.crude_stretch">
 <tt class="descname">crude_stretch</tt><big>(</big><em>ch_nb</em>, <em>min_stretch=None</em>, <em>max_stretch=None</em><big>)</big><a class="headerlink" href="#imageo.image.Image.crude_stretch" title="Permalink to this definition">¶</a></dt>
-<dd>Perform simple linear stretching (without any cutoff) on the channel
-<em>ch_nb</em> of the current image and normalize to the [0,1] range.</dd></dl>
+<dd><p>Perform simple linear stretching (without any cutoff) on the channel
+<em>ch_nb</em> of the current image and normalize to the [0,1] range.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.enhance">
 <tt class="descname">enhance</tt><big>(</big><em>inverse=False</em>, <em>gamma=1.0</em>, <em>stretch='no'</em><big>)</big><a class="headerlink" href="#imageo.image.Image.enhance" title="Permalink to this definition">¶</a></dt>
-<dd>Image enhancement function. It applies <strong>in this order</strong> inversion,
+<dd><p>Image enhancement function. It applies <strong>in this order</strong> inversion,
 gamma correction, and stretching to the current image, with parameters
-<em>inverse</em> (see <a title="imageo.image.Image.invert" class="reference internal" href="#imageo.image.Image.invert"><tt class="xref docutils literal"><span class="pre">Image.invert()</span></tt></a>), <em>gamma</em> (see
-<a title="imageo.image.Image.gamma" class="reference internal" href="#imageo.image.Image.gamma"><tt class="xref docutils literal"><span class="pre">Image.gamma()</span></tt></a>), and <em>stretch</em> (see <a title="imageo.image.Image.stretch" class="reference internal" href="#imageo.image.Image.stretch"><tt class="xref docutils literal"><span class="pre">Image.stretch()</span></tt></a>).</dd></dl>
+<em>inverse</em> (see <a class="reference internal" href="#imageo.image.Image.invert" title="imageo.image.Image.invert"><tt class="xref py py-meth docutils literal"><span class="pre">Image.invert()</span></tt></a>), <em>gamma</em> (see
+<a class="reference internal" href="#imageo.image.Image.gamma" title="imageo.image.Image.gamma"><tt class="xref py py-meth docutils literal"><span class="pre">Image.gamma()</span></tt></a>), and <em>stretch</em> (see <a class="reference internal" href="#imageo.image.Image.stretch" title="imageo.image.Image.stretch"><tt class="xref py py-meth docutils literal"><span class="pre">Image.stretch()</span></tt></a>).</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.gamma">
 <tt class="descname">gamma</tt><big>(</big><em>gamma=1.0</em><big>)</big><a class="headerlink" href="#imageo.image.Image.gamma" title="Permalink to this definition">¶</a></dt>
-<dd>Apply gamma correction to the channels of the image. If <em>gamma</em> is a
+<dd><p>Apply gamma correction to the channels of the image. If <em>gamma</em> is a
 tuple, then is should have as many elements as the channels of the
 image, and the gamma correction is applied elementwise. If <em>gamma</em> is a
 number, the same gamma correction is applied on every channel, if there
-are several channels in the image. The behaviour of <a title="imageo.image.Image.gamma" class="reference internal" href="#imageo.image.Image.gamma"><tt class="xref docutils literal"><span class="pre">gamma()</span></tt></a> is
-undefined outside the normal [0,1] range of the channels.</dd></dl>
+are several channels in the image. The behaviour of <a class="reference internal" href="#imageo.image.Image.gamma" title="imageo.image.Image.gamma"><tt class="xref py py-func docutils literal"><span class="pre">gamma()</span></tt></a> is
+undefined outside the normal [0,1] range of the channels.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.invert">
 <tt class="descname">invert</tt><big>(</big><em>invert=True</em><big>)</big><a class="headerlink" href="#imageo.image.Image.invert" title="Permalink to this definition">¶</a></dt>
-<dd>Inverts all the channels of a image according to <em>invert</em>. If invert
+<dd><p>Inverts all the channels of a image according to <em>invert</em>. If invert
 is a tuple or a list, elementwise invertion is performed, otherwise all
-channels are inverted if <em>invert</em> is true (default).</dd></dl>
+channels are inverted if <em>invert</em> is true (default).</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.is_empty">
 <tt class="descname">is_empty</tt><big>(</big><big>)</big><a class="headerlink" href="#imageo.image.Image.is_empty" title="Permalink to this definition">¶</a></dt>
-<dd>Checks for an empty image.</dd></dl>
+<dd><p>Checks for an empty image.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.merge">
 <tt class="descname">merge</tt><big>(</big><em>img</em><big>)</big><a class="headerlink" href="#imageo.image.Image.merge" title="Permalink to this definition">¶</a></dt>
-<dd>Use the provided image as background for the current <em>img</em> image,
-that is if the current image has missing data.</dd></dl>
+<dd><p>Use the provided image as background for the current <em>img</em> image,
+that is if the current image has missing data.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.pil_image">
 <tt class="descname">pil_image</tt><big>(</big><big>)</big><a class="headerlink" href="#imageo.image.Image.pil_image" title="Permalink to this definition">¶</a></dt>
-<dd>Return a PIL image from the current image.</dd></dl>
+<dd><p>Return a PIL image from the current image.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.pil_save">
 <tt class="descname">pil_save</tt><big>(</big><em>filename</em>, <em>compression=6</em><big>)</big><a class="headerlink" href="#imageo.image.Image.pil_save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the image to the given <em>filename</em> using PIL. For now, the
+<dd><p>Save the image to the given <em>filename</em> using PIL. For now, the
 compression level [0-9] is ignored, due to PIL&#8217;s lack of support. See
-also <a title="imageo.image.Image.save" class="reference internal" href="#imageo.image.Image.save"><tt class="xref docutils literal"><span class="pre">save()</span></tt></a>.</dd></dl>
+also <a class="reference internal" href="#imageo.image.Image.save" title="imageo.image.Image.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a>.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.putalpha">
 <tt class="descname">putalpha</tt><big>(</big><em>alpha</em><big>)</big><a class="headerlink" href="#imageo.image.Image.putalpha" title="Permalink to this definition">¶</a></dt>
-<dd>Adds an <em>alpha</em> channel to the current image, or replaces it with
-<em>alpha</em> if it already exists.</dd></dl>
+<dd><p>Adds an <em>alpha</em> channel to the current image, or replaces it with
+<em>alpha</em> if it already exists.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.replace_luminance">
 <tt class="descname">replace_luminance</tt><big>(</big><em>luminance</em><big>)</big><a class="headerlink" href="#imageo.image.Image.replace_luminance" title="Permalink to this definition">¶</a></dt>
-<dd>Replace the Y channel of the image by the array <em>luminance</em>. If the
+<dd><p>Replace the Y channel of the image by the array <em>luminance</em>. If the
 image is not in YCbCr mode, it is converted automatically to and
-from that mode.</dd></dl>
+from that mode.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.resize">
 <tt class="descname">resize</tt><big>(</big><em>shape</em><big>)</big><a class="headerlink" href="#imageo.image.Image.resize" title="Permalink to this definition">¶</a></dt>
-<dd>Resize the image to the given <em>shape</em> tuple, in place. For zooming,
+<dd><p>Resize the image to the given <em>shape</em> tuple, in place. For zooming,
 nearest neighbour method is used, while for shrinking, decimation is
 used. Therefore, <em>shape</em> must be a multiple or a divisor of the image
-shape.</dd></dl>
+shape.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.save">
 <tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=6</em><big>)</big><a class="headerlink" href="#imageo.image.Image.save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the image to the given <em>filename</em>.</dd></dl>
+<dd><p>Save the image to the given <em>filename</em>.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="imageo.image.Image.shape">
 <tt class="descname">shape</tt><a class="headerlink" href="#imageo.image.Image.shape" title="Permalink to this definition">¶</a></dt>
-<dd>Shape (dimensions) of the image.</dd></dl>
+<dd><p>Shape (dimensions) of the image.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.show">
 <tt class="descname">show</tt><big>(</big><big>)</big><a class="headerlink" href="#imageo.image.Image.show" title="Permalink to this definition">¶</a></dt>
-<dd>Display the image on screen.</dd></dl>
+<dd><p>Display the image on screen.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.stretch">
 <tt class="descname">stretch</tt><big>(</big><em>stretch='no'</em><big>)</big><a class="headerlink" href="#imageo.image.Image.stretch" title="Permalink to this definition">¶</a></dt>
-<dd>Apply stretching to the current image. The value of <em>stretch</em> sets
+<dd><p>Apply stretching to the current image. The value of <em>stretch</em> sets
 the type of stretching applied. The values &#8220;histogram&#8221;, &#8220;linear&#8221;,
 &#8220;crude&#8221; (or &#8220;crude-stretch&#8221;) perform respectively histogram
 equalization, contrast stretching (with 5% cutoff on both sides), and
 contrast stretching without cutoff. If a tuple or a list of two values
 is given as input, then a contrast stretching is performed with the
 values as cutoff. These values should be normalized in the range
-[0.0,1.0].</dd></dl>
+[0.0,1.0].</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.stretch_hist_equalize">
 <tt class="descname">stretch_hist_equalize</tt><big>(</big><em>ch_nb</em><big>)</big><a class="headerlink" href="#imageo.image.Image.stretch_hist_equalize" title="Permalink to this definition">¶</a></dt>
-<dd>Stretch the current image&#8217;s colors by performing histogram
-equalization on channel <em>ch_nb</em>.</dd></dl>
+<dd><p>Stretch the current image&#8217;s colors by performing histogram
+equalization on channel <em>ch_nb</em>.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.stretch_linear">
 <tt class="descname">stretch_linear</tt><big>(</big><em>ch_nb</em>, <em>cutoffs=(0.0050000000000000001</em>, <em>0.0050000000000000001)</em><big>)</big><a class="headerlink" href="#imageo.image.Image.stretch_linear" title="Permalink to this definition">¶</a></dt>
-<dd>Stretch linearly the contrast of the current image on channel
-<em>ch_nb</em>, using <em>cutoffs</em> for left and right trimming.</dd></dl>
+<dd><p>Stretch linearly the contrast of the current image on channel
+<em>ch_nb</em>, using <em>cutoffs</em> for left and right trimming.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.terragon_des_save">
 <tt class="descname">terragon_des_save</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#imageo.image.Image.terragon_des_save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the des file of the terragon format.</dd></dl>
+<dd><p>Save the des file of the terragon format.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.terragon_lut_save">
-<tt class="descname">terragon_lut_save</tt><big>(</big><em>filename</em>, <em>cutoffs=</em><span class="optional">[</span>, <em>0.029999999999999999</em>, <em>0.029999999999999999</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#imageo.image.Image.terragon_lut_save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the lut file of the terragon format.</dd></dl>
+<tt class="descname">terragon_lut_save</tt><big>(</big><em>filename, cutoffs=[0.029999999999999999, 0.029999999999999999]</em><big>)</big><a class="headerlink" href="#imageo.image.Image.terragon_lut_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the lut file of the terragon format.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.terragon_pic_save">
 <tt class="descname">terragon_pic_save</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#imageo.image.Image.terragon_pic_save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the pic file of the terragon format.</dd></dl>
+<dd><p>Save the pic file of the terragon format.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="imageo.image.Image.terragon_save">
 <tt class="descname">terragon_save</tt><big>(</big><em>filename</em>, <em>compression</em><big>)</big><a class="headerlink" href="#imageo.image.Image.terragon_save" title="Permalink to this definition">¶</a></dt>
-<dd>Save the image to the given <em>filename</em> in terragon format.</dd></dl>
+<dd><p>Save the image to the given <em>filename</em> in terragon format.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -258,12 +284,14 @@ equalization on channel <em>ch_nb</em>.</dd></dl>
 <dl class="function">
 <dt id="imageo.image.rgb2ycbcr">
 <tt class="descclassname">imageo.image.</tt><tt class="descname">rgb2ycbcr</tt><big>(</big><em>r__</em>, <em>g__</em>, <em>b__</em><big>)</big><a class="headerlink" href="#imageo.image.rgb2ycbcr" title="Permalink to this definition">¶</a></dt>
-<dd>Convert the three RGB channels to YCbCr.</dd></dl>
+<dd><p>Convert the three RGB channels to YCbCr.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="imageo.image.ycbcr2rgb">
 <tt class="descclassname">imageo.image.</tt><tt class="descname">ycbcr2rgb</tt><big>(</big><em>y__</em>, <em>cb_</em>, <em>cr_</em><big>)</big><a class="headerlink" href="#imageo.image.ycbcr2rgb" title="Permalink to this definition">¶</a></dt>
-<dd>Convert the three YCbCr channels to RGB channels.</dd></dl>
+<dd><p>Convert the three YCbCr channels to RGB channels.</p>
+</dd></dl>
 
 </div>
 
@@ -280,7 +308,7 @@ equalization on channel <em>ch_nb</em>.</dd></dl>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="geo_image.html" title="Geographical images: geo_image"
@@ -293,8 +321,8 @@ equalization on channel <em>ch_nb</em>.</dd></dl>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, SMHI.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
     </div>
   </body>
 </html>

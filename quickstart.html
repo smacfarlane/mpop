@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,12 +14,13 @@
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
         VERSION:     '0.9.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
     <link rel="next" title="Making use of mpop: the pp package" href="pp.html" />
@@ -31,8 +34,8 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pp.html" title="Making use of mpop: the pp package"
              accesskey="N">next</a> |</li>
@@ -44,43 +47,43 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="">Quickstart</a><ul>
-<li><a class="reference external" href="#first-example">First example</a></li>
-<li><a class="reference external" href="#we-want-more">We want more !</a></li>
-<li><a class="reference external" href="#retrieving-channels">Retrieving channels</a></li>
-<li><a class="reference external" href="#pges">PGEs</a></li>
-<li><a class="reference external" href="#making-custom-composites">Making custom composites</a></li>
-<li><a class="reference external" href="#projections">Projections</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#first-example">First example</a></li>
+<li><a class="reference internal" href="#we-want-more">We want more !</a></li>
+<li><a class="reference internal" href="#retrieving-channels">Retrieving channels</a></li>
+<li><a class="reference internal" href="#pges">PGEs</a></li>
+<li><a class="reference internal" href="#making-custom-composites">Making custom composites</a></li>
+<li><a class="reference internal" href="#projections">Projections</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="install.html"
-                                  title="previous chapter">Installation instructions</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="pp.html"
-                                  title="next chapter">Making use of mpop: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">pp</span></tt> package</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="sources/quickstart.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation instructions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pp.html"
+                        title="next chapter">Making use of mpop: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">pp</span></tt> package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/quickstart.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -125,7 +128,7 @@ as a datetime object. The area defines which data to load in the next step.</p>
 <p>The next step is loading the data. This is done using mipp, which takes care of
 reading the HRIT data, and slicing the data so that we read just what is
 needed. Calibration is also done with mipp.</p>
-<p>Here we call the <tt class="xref docutils literal"><span class="pre">load()</span></tt> function with a list of the wavelengths of the channels
+<p>Here we call the <tt class="xref py py-meth docutils literal"><span class="pre">load()</span></tt> function with a list of the wavelengths of the channels
 we are interested in. Each retrieved channel is the closest in terms of central
 wavelength, provided that the required wavelength is within the bounds of the
 channel.</p>
@@ -139,9 +142,9 @@ channels based on its name.</p>
 </pre></div>
 </div>
 <p>Once the channels are loaded, we generate an overview RGB composite image, and
-save it as a png image. Instead of <tt class="xref docutils literal"><span class="pre">save()</span></tt>, one could also use
-<tt class="xref docutils literal"><span class="pre">show()</span></tt> if the only purpose is to display the image on screen.</p>
-<p>Available composites are listed in the <tt class="xref docutils literal"><span class="pre">pp.satellites.visir</span></tt> module
+save it as a png image. Instead of <tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt>, one could also use
+<tt class="xref py py-meth docutils literal"><span class="pre">show()</span></tt> if the only purpose is to display the image on screen.</p>
+<p>Available composites are listed in the <tt class="xref py py-mod docutils literal"><span class="pre">pp.satellites.visir</span></tt> module
 in the mpop documentation.</p>
 </div>
 <div class="section" id="we-want-more">
@@ -241,7 +244,7 @@ The loading procedure for PGEs is exactly the same as with regular channels:</p>
 </div>
 <div class="section" id="making-custom-composites">
 <h2>Making custom composites<a class="headerlink" href="#making-custom-composites" title="Permalink to this headline">¶</a></h2>
-<p>Building custom composites makes use of the <tt class="xref docutils literal"><span class="pre">imageo</span></tt> module. For example,
+<p>Building custom composites makes use of the <tt class="xref py py-mod docutils literal"><span class="pre">imageo</span></tt> module. For example,
 building an overview composite can be done manually with:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">imageo.geo_image</span> <span class="kn">import</span> <span class="n">GeoImage</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">GeoImage</span><span class="p">((</span><span class="n">global_data</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
@@ -276,7 +279,7 @@ and we can operate as before to generate and play with RGB composites:</p>
 </div>
 <p>The image is saved here in <a class="reference external" href="http://trac.osgeo.org/geotiff/">GeoTiff</a> format.</p>
 <p>On projected images, one can also add contour overlay with the
-<tt class="xref docutils literal"><span class="pre">imageo.geo_image.add_overlay()</span></tt>.</p>
+<tt class="xref py py-meth docutils literal"><span class="pre">imageo.geo_image.add_overlay()</span></tt>.</p>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -300,7 +303,7 @@ and we can operate as before to generate and play with RGB composites:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="pp.html" title="Making use of mpop: the pp package"
@@ -312,8 +315,8 @@ and we can operate as before to generate and play with RGB composites:</p>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, SMHI.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
     </div>
   </body>
 </html>

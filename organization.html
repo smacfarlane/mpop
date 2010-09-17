@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,12 +14,13 @@
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
         VERSION:     '0.9.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
     <link rel="next" title="Satellite and Instrument API" href="satellites_h.html" />
@@ -31,8 +34,8 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="satellites_h.html" title="Satellite and Instrument API"
              accesskey="N">next</a> |</li>
@@ -44,40 +47,40 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="">Organization of the package</a><ul>
-<li><a class="reference external" href="#writing-a-new-input-plugin">Writing a new input plugin</a></li>
-<li><a class="reference external" href="#adding-an-instrument">Adding an instrument</a></li>
-<li><a class="reference external" href="#adding-a-satellite">Adding a satellite</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Organization of the package</a><ul>
+<li><a class="reference internal" href="#writing-a-new-input-plugin">Writing a new input plugin</a></li>
+<li><a class="reference internal" href="#adding-an-instrument">Adding an instrument</a></li>
+<li><a class="reference internal" href="#adding-a-satellite">Adding a satellite</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="input.html"
-                                  title="previous chapter">Input plugins: the <tt class="docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="satellites_h.html"
-                                  title="next chapter">Satellite and Instrument API</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="sources/organization.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="input.html"
+                        title="previous chapter">Input plugins: the <tt class="docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="satellites_h.html"
+                        title="next chapter">Satellite and Instrument API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/organization.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -90,20 +93,20 @@
 <h1>Organization of the package<a class="headerlink" href="#organization-of-the-package" title="Permalink to this headline">¶</a></h1>
 <p>The mpop package is organized as follows:</p>
 <ul class="simple">
-<li>the <tt class="xref docutils literal"><span class="pre">satin</span></tt> directory contains the input plugins to the different data
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">satin</span></tt> directory contains the input plugins to the different data
 formats. Available plugins include aapp1b, mipp, and msg_hrit.</li>
-<li>the <tt class="xref docutils literal"><span class="pre">imageo</span></tt> directory contains the image object and handling modules.</li>
-<li>the <tt class="xref docutils literal"><span class="pre">pp</span></tt> directory contains the different instruments and satellites
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">imageo</span></tt> directory contains the image object and handling modules.</li>
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">pp</span></tt> directory contains the different instruments and satellites
 implementations.</li>
-<li>the <tt class="xref docutils literal"><span class="pre">runner</span></tt> directory contains tools for batch producing satellite
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">runner</span></tt> directory contains tools for batch producing satellite
 images.</li>
 </ul>
 <div class="section" id="writing-a-new-input-plugin">
 <h2>Writing a new input plugin<a class="headerlink" href="#writing-a-new-input-plugin" title="Permalink to this headline">¶</a></h2>
 <p>An input plugin has to implement the two following functions:</p>
 <ul class="simple">
-<li><tt class="xref docutils literal"><span class="pre">load()</span></tt> that loads the calibrated data into the channels.</li>
-<li><tt class="xref docutils literal"><span class="pre">get_lat_lon()</span></tt> which returns the latitude and longitude of the satellite
+<li><tt class="xref py py-func docutils literal"><span class="pre">load()</span></tt> that loads the calibrated data into the channels.</li>
+<li><tt class="xref py py-func docutils literal"><span class="pre">get_lat_lon()</span></tt> which returns the latitude and longitude of the satellite
 view. This is needed only when the satellite view cannot be expressed
 analytically (swath).</li>
 </ul>
@@ -414,7 +417,7 @@ analytically (swath).</li>
 </div>
 <div class="section" id="adding-an-instrument">
 <h2>Adding an instrument<a class="headerlink" href="#adding-an-instrument" title="Permalink to this headline">¶</a></h2>
-<p>In <tt class="xref docutils literal"><span class="pre">pp.instrument</span></tt> directory, one has to add a channel list and an
+<p>In <tt class="xref py py-mod docutils literal"><span class="pre">pp.instrument</span></tt> directory, one has to add a channel list and an
 instrument name in a child class from visir. For example, for the AVHRR
 instrument:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -609,7 +612,7 @@ instrument:</p>
 </div>
 <div class="section" id="adding-a-satellite">
 <h2>Adding a satellite<a class="headerlink" href="#adding-a-satellite" title="Permalink to this headline">¶</a></h2>
-<p>In the <tt class="xref docutils literal"><span class="pre">pp.satellite</span></tt> directory, add the definition of the satellite as a
+<p>In the <tt class="xref py py-mod docutils literal"><span class="pre">pp.satellite</span></tt> directory, add the definition of the satellite as a
 child class of the instrument of interest. For example here is the noaa17
 satellite definition:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -719,7 +722,7 @@ named after the fullname of the satellite:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modindex.html" title="Global Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="satellites_h.html" title="Satellite and Instrument API"
@@ -731,8 +734,8 @@ named after the fullname of the satellite:</p>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, SMHI.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
     </div>
   </body>
 </html>
