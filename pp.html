@@ -74,7 +74,7 @@
                         title="previous chapter">Quickstart</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="input.html"
-                        title="next chapter">Input plugins: the <tt class="docutils literal"><span class="pre">satin</span></tt> package</a></p>
+                        title="next chapter">Input plugins: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/pp.txt"
@@ -166,14 +166,14 @@ pyresample&#8217;s documentation) or string identificator for the area. In the l
 case, the referenced region has to be defined in the <cite>areas.def</cite> file located
 in the directory pointed by the <cite>PPP_CONFIG_DIR</cite> environment variables.</p>
 <p>For more information about the internals of the projection process, take a look
-at the <a class="reference internal" href="#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
+at the <a class="reference internal" href="satellites_h.html#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
 </div>
 <div class="section" id="image-composites">
 <h2>Image composites<a class="headerlink" href="#image-composites" title="Permalink to this headline">¶</a></h2>
 <p>Methods building image composites are distributed in different modules, taking
 advantage of the hierarchical structure offered by OOP.</p>
 <p>The image composites common to all visir instruments are defined in the
-<a class="reference internal" href="#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
+<a class="reference internal" href="satellites_h.html#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
 <tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.avhrr</span></tt> or <a class="reference internal" href="satellites_h.html#module-pp.instruments.seviri" title="pp.instruments.seviri"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.seviri</span></tt></a> overload these
 methods to adapt better for the instrument at hand.</p>
 <p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Geographic images</em></a>.</p>
@@ -224,7 +224,8 @@ instrument):</p>
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#</span>
+43
+44</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#</span>
 <span class="c"># Level 1.5 configuration file for Meteosat-7</span>
 <span class="c">#</span>
 <span class="c"># An item like:</span>
@@ -247,7 +248,8 @@ instrument):</p>
 
 <span class="k">[mviri-level1]</span>
 <span class="na">format</span> <span class="o">=</span> <span class="s">&#39;xrit/MTP&#39;</span>
-<span class="na">dir</span> <span class="o">=</span> <span class="s">&#39;/data/prod/satellit/meteosat7&#39;</span>
+<span class="c">#dir = &#39;/data/prod/satellit/meteosat7&#39;</span>
+<span class="na">dir</span> <span class="o">=</span> <span class="s">&#39;/local_disk/data/satellite/met7&#39;</span>
 <span class="na">filename</span> <span class="o">=</span> <span class="s">&#39;L-000-MTP___-MET7________-%(channel)s_057E-%(segment)s-%Y%m%d%H%M-__&#39;</span>
 
 <span class="k">[mviri-1]</span>
@@ -564,7 +566,7 @@ given <em>resolution</em>.</p>
 
 <dl class="method">
 <dt id="pp.scene.SatelliteInstrumentScene.load">
-<tt class="descname">load</tt><big>(</big><em>channels=None</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">load</tt><big>(</big><em>channels=None</em>, <em>reload=False</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load instrument data into the <em>channels</em>. <em>Channels</em> is a list or a
 tuple containing channels we will load data into, designated by there
 center wavelength (float), resolution (integer) or name (string). If
@@ -587,6 +589,16 @@ if None, all channels are projected and copied over to the return
 snapshot.</p>
 <p>Note: channels have to be loaded to be projected, otherwise an
 exception is raised.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.scene.SatelliteInstrumentScene.save">
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>to_format='netcdf4'</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the current scene into a file of format <em>to_format</em>. Supported
+formats are:</p>
+<ul class="simple">
+<li><em>netcdf4</em>: NetCDF4 with CF conventions.</li>
+</ul>
 </dd></dl>
 
 </dd></dl>
@@ -685,7 +697,7 @@ resulting scene object.</p>
 inherited when needed.</p>
 <dl class="class">
 <dt id="pp.channel.Channel">
-<em class="property">class </em><tt class="descclassname">pp.channel.</tt><tt class="descname">Channel</tt><big>(</big><em>name=None</em>, <em>resolution=0</em>, <em>wavelength_range=(-inf</em>, <em>-inf</em>, <em>-inf)</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#pp.channel.Channel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pp.channel.</tt><tt class="descname">Channel</tt><big>(</big><em>name=None</em>, <em>resolution=0</em>, <em>wavelength_range=(-inf</em>, <em>-inf</em>, <em>-inf)</em>, <em>data=None</em>, <em>calibration_unit=None</em><big>)</big><a class="headerlink" href="#pp.channel.Channel" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the satellite channel class. It defines satellite channels as a
 container for calibrated channel data.</p>
 <p>The <em>resolution</em> sets the resolution of the channel, in meters. The
@@ -973,7 +985,8 @@ flag can be used to regenerate the saved projector arrays.</p>
 </div>
 <div class="section" id="module-pp.satellites">
 <span id="satellite-class-loader"></span><h3>Satellite class loader<a class="headerlink" href="#module-pp.satellites" title="Permalink to this headline">¶</a></h3>
-<p>Load relevant modules.</p>
+<p>pp.satellites is the module englobes all satellite specific modules. In
+itself, it hold the mighty <a class="reference internal" href="#pp.satellites.get_satellite_class" title="pp.satellites.get_satellite_class"><tt class="xref py py-meth docutils literal"><span class="pre">pp.satellites.get_satellite_class()</span></tt></a> method.</p>
 <dl class="function">
 <dt id="pp.satellites.build_instrument">
 <tt class="descclassname">pp.satellites.</tt><tt class="descname">build_instrument</tt><big>(</big><em>name</em>, <em>channels</em><big>)</big><a class="headerlink" href="#pp.satellites.build_instrument" title="Permalink to this definition">¶</a></dt>
