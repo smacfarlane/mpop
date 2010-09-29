@@ -54,6 +54,7 @@
 <li><a class="reference internal" href="#creating-a-scene-object">Creating a scene object</a></li>
 <li><a class="reference internal" href="#loading-the-data">Loading the data</a></li>
 <li><a class="reference internal" href="#re-projecting-data">Re-projecting data</a></li>
+<li><a class="reference internal" href="#geo-localisation-of-the-data">Geo-localisation of the data</a></li>
 <li><a class="reference internal" href="#image-composites">Image composites</a></li>
 <li><a class="reference internal" href="#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
 <li><a class="reference internal" href="#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
@@ -74,7 +75,7 @@
                         title="previous chapter">Quickstart</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="input.html"
-                        title="next chapter">Input plugins: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
+                        title="next chapter">Input plugins: the <tt class="docutils literal"><span class="pre">satin</span></tt> package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/pp.txt"
@@ -166,14 +167,23 @@ pyresample&#8217;s documentation) or string identificator for the area. In the l
 case, the referenced region has to be defined in the <cite>areas.def</cite> file located
 in the directory pointed by the <cite>PPP_CONFIG_DIR</cite> environment variables.</p>
 <p>For more information about the internals of the projection process, take a look
-at the <a class="reference internal" href="satellites_h.html#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
+at the <a class="reference internal" href="#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
+</div>
+<div class="section" id="geo-localisation-of-the-data">
+<h2>Geo-localisation of the data<a class="headerlink" href="#geo-localisation-of-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Once the data is loaded, each channel should have an <cite>area</cite> attribute
+containing a <a class="reference external" href="http://googlecode.com/p/pyresample">pyresample</a> area object, if the <a class="reference external" href="http://googlecode.com/p/pyresample">pyresample</a> package is
+available. These area objects should implement the <tt class="xref py py-meth docutils literal"><span class="pre">get_lonlats()</span></tt> method,
+returning the longitudes and latitudes of the channel data.  For more
+information on this matter, the reader is then referred to the <a class="reference external" href="http://pyresample.googlecode.com/svn/trunk/docs/build/html/index.html">documentation</a> of
+the aforementioned package.</p>
 </div>
 <div class="section" id="image-composites">
 <h2>Image composites<a class="headerlink" href="#image-composites" title="Permalink to this headline">¶</a></h2>
 <p>Methods building image composites are distributed in different modules, taking
 advantage of the hierarchical structure offered by OOP.</p>
 <p>The image composites common to all visir instruments are defined in the
-<a class="reference internal" href="satellites_h.html#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
+<a class="reference internal" href="#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
 <tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.avhrr</span></tt> or <a class="reference internal" href="satellites_h.html#module-pp.instruments.seviri" title="pp.instruments.seviri"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.seviri</span></tt></a> overload these
 methods to adapt better for the instrument at hand.</p>
 <p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Geographic images</em></a>.</p>
@@ -969,7 +979,7 @@ satellite projection to an area of interest in polar projection for
 example.</p>
 <dl class="class">
 <dt id="pp.projector.Projector">
-<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area_id</em>, <em>out_area_id</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class define projector objects. They contain the mapping
 information necessary for projection purposes. For efficiency reasons,
 generated projectors are saved to disk for later reuse. The <em>recompute</em>
