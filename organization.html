@@ -563,10 +563,10 @@ instrument:</p>
             <span class="n">imgb</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">((</span><span class="n">ch1b</span><span class="p">,</span> <span class="n">ch2</span><span class="p">,</span> <span class="n">ch3</span><span class="p">),</span>
                                       <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
                                       <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
-                                      <span class="n">fill_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                                      <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;RGB&quot;</span><span class="p">)</span>
+                                      <span class="n">fill_value</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                      <span class="n">mode</span><span class="o">=</span><span class="s">&quot;RGB&quot;</span><span class="p">)</span>
             
-            <span class="n">imgb</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">))</span>
+            <span class="n">imgb</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">))</span>
 
         <span class="k">except</span> <span class="p">(</span><span class="n">NotLoadedError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
             <span class="n">imgb</span> <span class="o">=</span> <span class="bp">None</span>
@@ -577,10 +577,10 @@ instrument:</p>
             <span class="n">imga</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">((</span><span class="n">ch1a</span><span class="p">,</span> <span class="n">ch2</span><span class="p">,</span> <span class="n">ch3</span><span class="p">),</span>
                                       <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
                                       <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
-                                      <span class="n">fill_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                                      <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;RGB&quot;</span><span class="p">)</span>
+                                      <span class="n">fill_value</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                      <span class="n">mode</span><span class="o">=</span><span class="s">&quot;RGB&quot;</span><span class="p">)</span>
 
-            <span class="n">imga</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">))</span>
+            <span class="n">imga</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">))</span>
 
         <span class="k">except</span> <span class="p">(</span><span class="n">NotLoadedError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
             <span class="n">imga</span> <span class="o">=</span> <span class="bp">None</span>
@@ -601,95 +601,6 @@ instrument:</p>
 <p>In the <tt class="xref py py-mod docutils literal"><span class="pre">pp.satellite</span></tt> directory, add the definition of the satellite as a
 child class of the instrument of interest. For example here is the noaa17
 satellite definition:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># Copyright (c) 2010.</span>
-
-<span class="c"># SMHI,</span>
-<span class="c"># Folkborgsvägen 1,</span>
-<span class="c"># Norrköping, </span>
-<span class="c"># Sweden</span>
-
-<span class="c"># Author(s):</span>
- 
-<span class="c">#   Martin Raspaud &lt;martin.raspaud@smhi.se&gt;</span>
-
-<span class="c"># This file is part of mpop.</span>
-
-<span class="c"># mpop is free software: you can redistribute it and/or modify it under the</span>
-<span class="c"># terms of the GNU General Public License as published by the Free Software</span>
-<span class="c"># Foundation, either version 3 of the License, or (at your option) any later</span>
-<span class="c"># version.</span>
-
-<span class="c"># mpop is distributed in the hope that it will be useful, but WITHOUT ANY</span>
-<span class="c"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
-<span class="c"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
-
-<span class="c"># You should have received a copy of the GNU General Public License along with</span>
-<span class="c"># mpop.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-
-<span class="sd">&quot;&quot;&quot;This module is the loader for Noaa17 scenes.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">pp.instruments.avhrr</span> <span class="kn">import</span> <span class="n">AvhrrScene</span>
-
-
-<span class="k">class</span> <span class="nc">Noaa17AvhrrScene</span><span class="p">(</span><span class="n">AvhrrScene</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This class implements Noaa17 scenes as captured by the Avhrr</span>
-<span class="sd">    instrument. It&#39;s constructor accepts the same arguments as</span>
-<span class="sd">    :class:`pp.scene.SatelliteScene`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">satname</span> <span class="o">=</span> <span class="s">&quot;noaa&quot;</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="s">&quot;17&quot;</span>
-    
-    <span class="n">lat</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">lon</span> <span class="o">=</span> <span class="bp">None</span>
-</pre></div>
-</td></tr></table></div>
 <p>One should also link to the desired input format through a configuration file
 named after the fullname of the satellite:</p>
 </div>

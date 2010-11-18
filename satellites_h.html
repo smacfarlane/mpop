@@ -126,7 +126,7 @@
 
 <dl class="method">
 <dt id="pp.instruments.visir.VisirScene.channel_image">
-<tt class="descname">channel_image</tt><big>(</big><em>channel</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">channel_image</tt><big>(</big><em>channel</em>, <em>fill_value=0</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the <em>channel</em>.</p>
 </dd></dl>
 
@@ -220,15 +220,22 @@ satellite projection to an area of interest in polar projection for
 example.</p>
 <dl class="class">
 <dt id="pp.projector.Projector">
-<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class define projector objects. They contain the mapping
 information necessary for projection purposes. For efficiency reasons,
-generated projectors are saved to disk for later reuse. The <em>recompute</em>
-flag can be used to regenerate the saved projector arrays.</p>
+generated projectors can be saved to disk for later reuse. Use the
+<a class="reference internal" href="#pp.projector.Projector.save" title="pp.projector.Projector.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method for this.</p>
 <dl class="method">
 <dt id="pp.projector.Projector.project_array">
 <tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project an array <em>data</em> along the given Projector object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.projector.Projector.save">
+<tt class="descname">save</tt><big>(</big><em>resave=False</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the precomputation to disk, and overwrite existing file in case
+<em>resave</em> is true.</p>
 </dd></dl>
 
 </dd></dl>

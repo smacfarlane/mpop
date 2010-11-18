@@ -75,7 +75,7 @@
                         title="previous chapter">Quickstart</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="input.html"
-                        title="next chapter">Input plugins: the <tt class="docutils literal"><span class="pre">satin</span></tt> package</a></p>
+                        title="next chapter">Input plugins: the <tt class="docutils literal docutils literal"><span class="pre">satin</span></tt> package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/pp.txt"
@@ -167,7 +167,7 @@ pyresample&#8217;s documentation) or string identificator for the area. In the l
 case, the referenced region has to be defined in the <cite>areas.def</cite> file located
 in the directory pointed by the <cite>PPP_CONFIG_DIR</cite> environment variables.</p>
 <p>For more information about the internals of the projection process, take a look
-at the <a class="reference internal" href="#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
+at the <a class="reference internal" href="satellites_h.html#module-pp.projector" title="pp.projector"><tt class="xref py py-mod docutils literal"><span class="pre">pp.projector</span></tt></a> module.</p>
 </div>
 <div class="section" id="geo-localisation-of-the-data">
 <h2>Geo-localisation of the data<a class="headerlink" href="#geo-localisation-of-the-data" title="Permalink to this headline">¶</a></h2>
@@ -183,7 +183,7 @@ the aforementioned package.</p>
 <p>Methods building image composites are distributed in different modules, taking
 advantage of the hierarchical structure offered by OOP.</p>
 <p>The image composites common to all visir instruments are defined in the
-<a class="reference internal" href="#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
+<a class="reference internal" href="satellites_h.html#module-pp.instruments.visir" title="pp.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.visir</span></tt></a> module. Some instrument modules, like
 <tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.avhrr</span></tt> or <a class="reference internal" href="satellites_h.html#module-pp.instruments.seviri" title="pp.instruments.seviri"><tt class="xref py py-mod docutils literal"><span class="pre">pp.instruments.seviri</span></tt></a> overload these
 methods to adapt better for the instrument at hand.</p>
 <p>For instructions on how to write a new composites, see <a class="reference internal" href="image.html#geographic-images"><em>Geographic images</em></a>.</p>
@@ -402,15 +402,15 @@ correponding python code.</p>
 
 <span class="sd">&quot;&quot;&quot;This modules describes the mviri instrument.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">pp.instruments.visir</span> <span class="kn">import</span> <span class="n">VisirScene</span>
 <span class="kn">from</span> <span class="nn">imageo</span> <span class="kn">import</span> <span class="n">geo_image</span>
+<span class="kn">import</span> <span class="nn">pp.instruments.visir</span>
+
 
 <span class="n">MVIRI</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;00_7&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="mi">2500</span><span class="p">],</span>
          <span class="p">[</span><span class="s">&quot;06_4&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">5.7</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">),</span> <span class="mi">5000</span><span class="p">],</span>
          <span class="p">[</span><span class="s">&quot;11_5&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">11.5</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">),</span> <span class="mi">5000</span><span class="p">]]</span>
 
-<span class="k">class</span> <span class="nc">MviriScene</span><span class="p">(</span><span class="n">VisirScene</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MviriScene</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">visir</span><span class="o">.</span><span class="n">VisirScene</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This class sets up the Seviri instrument channel list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">channel_list</span> <span class="o">=</span> <span class="n">MVIRI</span>
@@ -429,8 +429,8 @@ correponding python code.</p>
         <span class="n">img</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">((</span><span class="n">ch1</span><span class="p">,</span> <span class="n">ch2</span><span class="p">,</span> <span class="n">ch3</span><span class="p">),</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
-                                 <span class="n">fill_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                                 <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;RGB&quot;</span><span class="p">)</span>
+                                 <span class="n">fill_value</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                                 <span class="n">mode</span><span class="o">=</span><span class="s">&quot;RGB&quot;</span><span class="p">)</span>
         
         <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="s">&quot;crude&quot;</span><span class="p">)</span>
         <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">)</span>
@@ -447,100 +447,15 @@ correponding python code.</p>
         <span class="n">img</span> <span class="o">=</span> <span class="n">geo_image</span><span class="o">.</span><span class="n">GeoImage</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mf">10.8</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">time_slot</span><span class="p">,</span>
-                                 <span class="n">fill_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                                 <span class="n">mode</span> <span class="o">=</span> <span class="s">&quot;L&quot;</span><span class="p">)</span>
+                                 <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">mode</span><span class="o">=</span><span class="s">&quot;L&quot;</span><span class="p">)</span>
         
-        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">inverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="s">&quot;crude&quot;</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="s">&quot;crude&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">img</span>
 
     <span class="n">ir108</span><span class="o">.</span><span class="n">prerequisites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mf">10.8</span><span class="p">])</span>
-</pre></div>
-</td></tr></table></div>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># Copyright (c) 2010.</span>
-
-<span class="c"># SMHI,</span>
-<span class="c"># Folkborgsvägen 1,</span>
-<span class="c"># Norrköping, </span>
-<span class="c"># Sweden</span>
-
-<span class="c"># Author(s):</span>
- 
-<span class="c">#   Martin Raspaud &lt;martin.raspaud@smhi.se&gt;</span>
-
-<span class="c"># This file is part of mpop.</span>
-
-<span class="c"># mpop is free software: you can redistribute it and/or modify it under the</span>
-<span class="c"># terms of the GNU General Public License as published by the Free Software</span>
-<span class="c"># Foundation, either version 3 of the License, or (at your option) any later</span>
-<span class="c"># version.</span>
-
-<span class="c"># mpop is distributed in the hope that it will be useful, but WITHOUT ANY</span>
-<span class="c"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
-<span class="c"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
-
-<span class="c"># You should have received a copy of the GNU General Public License along with</span>
-<span class="c"># mpop.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-
-<span class="sd">&quot;&quot;&quot;This module is the loader for Meteosat07 scenes.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">pp.instruments.mviri</span> <span class="kn">import</span> <span class="n">MviriScene</span>
-
-<span class="k">class</span> <span class="nc">Meteosat07MviriScene</span><span class="p">(</span><span class="n">MviriScene</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This class implements Meteosat07 scenes as captured by the Mviri</span>
-<span class="sd">    instrument. It&#39;s constructor accepts the same arguments as</span>
-<span class="sd">    :class:`pp.instruments.mviri.MviriScene`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">satname</span> <span class="o">=</span> <span class="s">&quot;meteosat&quot;</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="s">&quot;07&quot;</span>
-    
-        
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -576,11 +491,16 @@ given <em>resolution</em>.</p>
 
 <dl class="method">
 <dt id="pp.scene.SatelliteInstrumentScene.load">
-<tt class="descname">load</tt><big>(</big><em>channels=None</em>, <em>reload=False</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">load</tt><big>(</big><em>channels=None</em>, <em>load_again=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load instrument data into the <em>channels</em>. <em>Channels</em> is a list or a
 tuple containing channels we will load data into, designated by there
 center wavelength (float), resolution (integer) or name (string). If
 None, all channels are loaded.</p>
+<p>The <em>load_again</em> boolean flag allows to reload the channels even they
+have already been loaded, to mirror changes on disk for example. This
+is false by default.</p>
+<p>The other keyword arguments are passed as is to the reader
+plugin. Check the corresponding documentation for more details.</p>
 </dd></dl>
 
 <dl class="method">
@@ -603,7 +523,7 @@ exception is raised.</p>
 
 <dl class="method">
 <dt id="pp.scene.SatelliteInstrumentScene.save">
-<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>to_format='netcdf4'</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>to_format='netcdf4'</em>, <em>compression=True</em><big>)</big><a class="headerlink" href="#pp.scene.SatelliteInstrumentScene.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the current scene into a file of format <em>to_format</em>. Supported
 formats are:</p>
 <ul class="simple">
@@ -885,7 +805,7 @@ CTTH.</p>
 
 <dl class="method">
 <dt id="pp.instruments.visir.VisirScene.channel_image">
-<tt class="descname">channel_image</tt><big>(</big><em>channel</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">channel_image</tt><big>(</big><em>channel</em>, <em>fill_value=0</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the <em>channel</em>.</p>
 </dd></dl>
 
@@ -979,15 +899,22 @@ satellite projection to an area of interest in polar projection for
 example.</p>
 <dl class="class">
 <dt id="pp.projector.Projector">
-<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>precompute=False</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class define projector objects. They contain the mapping
 information necessary for projection purposes. For efficiency reasons,
-generated projectors are saved to disk for later reuse. The <em>recompute</em>
-flag can be used to regenerate the saved projector arrays.</p>
+generated projectors can be saved to disk for later reuse. Use the
+<a class="reference internal" href="satellites_h.html#pp.projector.Projector.save" title="pp.projector.Projector.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method for this.</p>
 <dl class="method">
 <dt id="pp.projector.Projector.project_array">
 <tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project an array <em>data</em> along the given Projector object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pp.projector.Projector.save">
+<tt class="descname">save</tt><big>(</big><em>resave=False</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the precomputation to disk, and overwrite existing file in case
+<em>resave</em> is true.</p>
 </dd></dl>
 
 </dd></dl>
@@ -999,16 +926,16 @@ flag can be used to regenerate the saved projector arrays.</p>
 itself, it hold the mighty <a class="reference internal" href="#pp.satellites.get_satellite_class" title="pp.satellites.get_satellite_class"><tt class="xref py py-meth docutils literal"><span class="pre">pp.satellites.get_satellite_class()</span></tt></a> method.</p>
 <dl class="function">
 <dt id="pp.satellites.build_instrument">
-<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_instrument</tt><big>(</big><em>name</em>, <em>channels</em><big>)</big><a class="headerlink" href="#pp.satellites.build_instrument" title="Permalink to this definition">¶</a></dt>
-<dd><p>Automatically generate an instrument class from its <em>name</em> and
-<em>channels</em>.</p>
+<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_instrument</tt><big>(</big><em>instrument_name</em>, <em>channel_list</em><big>)</big><a class="headerlink" href="#pp.satellites.build_instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically generate an instrument class from its <em>instrument_name</em> and
+<em>channel_list</em>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pp.satellites.build_satellite_class">
-<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_satellite_class</tt><big>(</big><em>satellite</em>, <em>num</em>, <em>var=''</em><big>)</big><a class="headerlink" href="#pp.satellites.build_satellite_class" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">pp.satellites.</tt><tt class="descname">build_satellite_class</tt><big>(</big><em>satellite</em>, <em>number</em>, <em>variant=''</em><big>)</big><a class="headerlink" href="#pp.satellites.build_satellite_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a class for the given satellite (defined by the three strings
-<em>satellite</em>, <em>num</em>, and <em>var</em>) on the fly, using a config file. The
+<em>satellite</em>, <em>number</em>, and <em>variant</em>) on the fly, using a config file. The
 function returns as many classes as there are instruments defined in the
 configuration files. They inherit from the corresponding instrument class,
 which is also created on the fly is no predefined module for this
@@ -1020,7 +947,9 @@ instrument is available.</p>
 <tt class="descclassname">pp.satellites.</tt><tt class="descname">get_satellite_class</tt><big>(</big><em>satellite</em>, <em>number</em>, <em>variant=''</em><big>)</big><a class="headerlink" href="#pp.satellites.get_satellite_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the class for a given satellite, defined by the three strings
 <em>satellite</em>, <em>number</em>, and <em>variant</em>. If no class is found, an attempt is
-made to build the class from a corresponding configuration file.</p>
+made to build the class from a corresponding configuration file, see
+<a class="reference internal" href="#pp.satellites.build_satellite_class" title="pp.satellites.build_satellite_class"><tt class="xref py py-func docutils literal"><span class="pre">build_satellite_class()</span></tt></a>. Several classes can be returned if a given
+satellite has several instruments.</p>
 </dd></dl>
 
 </div>
