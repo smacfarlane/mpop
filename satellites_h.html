@@ -42,9 +42,9 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Satellite and Instrument API</a><ul>
-<li><a class="reference internal" href="#module-pp.instruments.visir">The <tt class="docutils literal"><span class="pre">visir</span></tt> module</a></li>
-<li><a class="reference internal" href="#module-pp.projector">Projecting: the <tt class="docutils literal"><span class="pre">projector</span></tt> module</a></li>
-<li><a class="reference internal" href="#module-pp.instruments.seviri">The Seviri instrument</a></li>
+<li><a class="reference internal" href="#module-mpop.instruments.visir">The <tt class="docutils literal"><span class="pre">mpop.instruments.visir</span></tt> module</a></li>
+<li><a class="reference internal" href="#projecting-the-mpop-projector-module">Projecting: the <tt class="docutils literal"><span class="pre">mpop.projector</span></tt> module</a></li>
+<li><a class="reference internal" href="#module-mpop.instruments.seviri">The Seviri instrument</a></li>
 </ul>
 </li>
 </ul>
@@ -78,16 +78,16 @@
   <div class="section" id="satellite-and-instrument-api">
 <h1>Satellite and Instrument API<a class="headerlink" href="#satellite-and-instrument-api" title="Permalink to this headline">¶</a></h1>
 <p>The satellite interface is the core of the postprocessing package.</p>
-<div class="section" id="module-pp.instruments.visir">
-<span id="the-visir-module"></span><h2>The <tt class="xref py py-mod docutils literal"><span class="pre">visir</span></tt> module<a class="headerlink" href="#module-pp.instruments.visir" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-mpop.instruments.visir">
+<span id="the-mpop-instruments-visir-module"></span><h2>The <a class="reference internal" href="#module-mpop.instruments.visir" title="mpop.instruments.visir"><tt class="xref py py-mod docutils literal"><span class="pre">mpop.instruments.visir</span></tt></a> module<a class="headerlink" href="#module-mpop.instruments.visir" title="Permalink to this headline">¶</a></h2>
 <p>This module defines the generic VISIR instrument class.</p>
 <dl class="class">
-<dt id="pp.instruments.visir.VisirScene">
-<em class="property">class </em><tt class="descclassname">pp.instruments.visir.</tt><tt class="descname">VisirScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene">
+<em class="property">class </em><tt class="descclassname">mpop.instruments.visir.</tt><tt class="descname">VisirScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic RGB building methods for VISIR instruments.</p>
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.airmass">
-<tt class="descname">airmass</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.airmass" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.airmass">
+<tt class="descname">airmass</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.airmass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an airmass RGB image composite.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -119,121 +119,121 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.ash">
-<tt class="descname">ash</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ash" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.ash">
+<tt class="descname">ash</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.ash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Ash RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.channel_image">
-<tt class="descname">channel_image</tt><big>(</big><em>channel</em>, <em>fill_value=0</em><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.channel_image">
+<tt class="descname">channel_image</tt><big>(</big><em>channel</em>, <em>fill_value=0</em><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.channel_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the <em>channel</em>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.cloudtop">
-<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.cloudtop" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.cloudtop">
+<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.cloudtop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Cloudtop RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.convection">
-<tt class="descname">convection</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.convection" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.convection">
+<tt class="descname">convection</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.convection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Severe Convection RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.dust">
-<tt class="descname">dust</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.dust" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.dust">
+<tt class="descname">dust</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.dust" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Dust RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.fog">
-<tt class="descname">fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.fog" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.fog">
+<tt class="descname">fog</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.fog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Fog RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.green_snow">
-<tt class="descname">green_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.green_snow" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.green_snow">
+<tt class="descname">green_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.green_snow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Green Snow RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.ir108">
-<tt class="descname">ir108</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.ir108" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.ir108">
+<tt class="descname">ir108</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.ir108" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the IR 10.8um channel.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.natural">
-<tt class="descname">natural</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.natural" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.natural">
+<tt class="descname">natural</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.natural" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Natural Colors RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.night_fog">
-<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.night_fog" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.night_fog">
+<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.night_fog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Night Fog RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.overview">
-<tt class="descname">overview</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.overview" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.overview">
+<tt class="descname">overview</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.overview" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an overview RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.red_snow">
-<tt class="descname">red_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.red_snow" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.red_snow">
+<tt class="descname">red_snow</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.red_snow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Red Snow RGB image composite.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.vis06">
-<tt class="descname">vis06</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.vis06" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.vis06">
+<tt class="descname">vis06</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.vis06" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the VIS 0.635um channel.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.wv_high">
-<tt class="descname">wv_high</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_high" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.wv_high">
+<tt class="descname">wv_high</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.wv_high" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the IR 6.7um channel.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.visir.VisirScene.wv_low">
-<tt class="descname">wv_low</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.visir.VisirScene.wv_low" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.visir.VisirScene.wv_low">
+<tt class="descname">wv_low</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.visir.VisirScene.wv_low" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a black and white image of the IR 7.3um channel.</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-pp.projector">
-<span id="projecting-the-projector-module"></span><h2>Projecting: the <tt class="xref py py-mod docutils literal"><span class="pre">projector</span></tt> module<a class="headerlink" href="#module-pp.projector" title="Permalink to this headline">¶</a></h2>
-<p>This module handles coverage objects. Such objects are used to
+<div class="section" id="projecting-the-mpop-projector-module">
+<h2>Projecting: the <a class="reference internal" href="#module-mpop.projector" title="mpop.projector"><tt class="xref py py-mod docutils literal"><span class="pre">mpop.projector</span></tt></a> module<a class="headerlink" href="#projecting-the-mpop-projector-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-mpop.projector"></span><p>This module handles coverage objects. Such objects are used to
 transform area projected data by changing either the area or the
 projection or both. A typical usage is to transform one large area in
 satellite projection to an area of interest in polar projection for
 example.</p>
 <dl class="class">
-<dt id="pp.projector.Projector">
-<em class="property">class </em><tt class="descclassname">pp.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#pp.projector.Projector" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.projector.Projector">
+<em class="property">class </em><tt class="descclassname">mpop.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class define projector objects. They contain the mapping
 information necessary for projection purposes. For efficiency reasons,
 generated projectors can be saved to disk for later reuse. Use the
-<a class="reference internal" href="#pp.projector.Projector.save" title="pp.projector.Projector.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method for this.</p>
+<a class="reference internal" href="#mpop.projector.Projector.save" title="mpop.projector.Projector.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method for this.</p>
 <dl class="method">
-<dt id="pp.projector.Projector.project_array">
-<tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.projector.Projector.project_array">
+<tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project an array <em>data</em> along the given Projector object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.projector.Projector.save">
-<tt class="descname">save</tt><big>(</big><em>resave=False</em><big>)</big><a class="headerlink" href="#pp.projector.Projector.save" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.projector.Projector.save">
+<tt class="descname">save</tt><big>(</big><em>resave=False</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the precomputation to disk, and overwrite existing file in case
 <em>resave</em> is true.</p>
 </dd></dl>
@@ -241,22 +241,22 @@ generated projectors can be saved to disk for later reuse. Use the
 </dd></dl>
 
 </div>
-<div class="section" id="module-pp.instruments.seviri">
-<span id="the-seviri-instrument"></span><h2>The Seviri instrument<a class="headerlink" href="#module-pp.instruments.seviri" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-mpop.instruments.seviri">
+<span id="the-seviri-instrument"></span><h2>The Seviri instrument<a class="headerlink" href="#module-mpop.instruments.seviri" title="Permalink to this headline">¶</a></h2>
 <p>This modules describes the seviri instrument.</p>
 <dl class="class">
-<dt id="pp.instruments.seviri.SeviriScene">
-<em class="property">class </em><tt class="descclassname">pp.instruments.seviri.</tt><tt class="descname">SeviriScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene">
+<em class="property">class </em><tt class="descclassname">mpop.instruments.seviri.</tt><tt class="descname">SeviriScene</tt><big>(</big><em>time_slot=None</em>, <em>area_id=None</em>, <em>area=None</em>, <em>orbit=None</em><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class sets up the Seviri instrument channel list.</p>
 <dl class="method">
-<dt id="pp.instruments.seviri.SeviriScene.cloudtop">
-<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.cloudtop" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene.cloudtop">
+<tt class="descname">cloudtop</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene.cloudtop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Cloudtop RGB image composite from Seviri channels.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.seviri.SeviriScene.co2corr">
-<tt class="descname">co2corr</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.co2corr" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene.co2corr">
+<tt class="descname">co2corr</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene.co2corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>CO2 correction of the brightness temperature of the MSG 3.9um
 channel:</p>
 <div class="highlight-python"><pre>.. math::</pre>
@@ -268,22 +268,22 @@ dt_CO2 = (BT(IR10.8)-BT(IR13.4))/4.0</blockquote>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.seviri.SeviriScene.hr_overview">
-<tt class="descname">hr_overview</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.hr_overview" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene.hr_overview">
+<tt class="descname">hr_overview</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene.hr_overview" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a High Resolution Overview RGB image composite from Seviri
 channels.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.seviri.SeviriScene.hr_visual">
-<tt class="descname">hr_visual</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.hr_visual" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene.hr_visual">
+<tt class="descname">hr_visual</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene.hr_visual" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a High Resolution visual BW image composite from Seviri
 channels.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pp.instruments.seviri.SeviriScene.night_fog">
-<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#pp.instruments.seviri.SeviriScene.night_fog" title="Permalink to this definition">¶</a></dt>
+<dt id="mpop.instruments.seviri.SeviriScene.night_fog">
+<tt class="descname">night_fog</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.instruments.seviri.SeviriScene.night_fog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a Night Fog RGB image composite from Seviri channels.</p>
 </dd></dl>
 

@@ -79,12 +79,16 @@
 <h1>Organization of the package<a class="headerlink" href="#organization-of-the-package" title="Permalink to this headline">¶</a></h1>
 <p>The mpop package is organized as follows:</p>
 <ul class="simple">
-<li>the <tt class="xref py py-mod docutils literal"><span class="pre">satin</span></tt> directory contains the input plugins to the different data
-formats. Available plugins include aapp1b, mipp, and msg_hrit.</li>
-<li>the <tt class="xref py py-mod docutils literal"><span class="pre">imageo</span></tt> directory contains the image object and handling modules.</li>
-<li>the <tt class="xref py py-mod docutils literal"><span class="pre">pp</span></tt> directory contains the different instruments and satellites
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">mpop</span></tt> directory contains the core modules of mpop.</li>
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.satin</span></tt> directory contains the input plugins to the different
+data formats. Available plugins include aapp1b, mipp, and msg_hrit.</li>
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.imageo</span></tt> directory contains the image object and handling
+modules.</li>
+<li>the <a class="reference internal" href="pp.html#module-mpop.satellites" title="mpop.satellites"><tt class="xref py py-mod docutils literal"><span class="pre">mpop.satellites</span></tt></a> directory contains the different satellites
 implementations.</li>
-<li>the <tt class="xref py py-mod docutils literal"><span class="pre">runner</span></tt> directory contains tools for batch producing satellite
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.instruments</span></tt> directory contains the different instruments
+implementations.</li>
+<li>the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.saturn</span></tt> directory contains tools for batch producing satellite
 images.</li>
 </ul>
 <div class="section" id="writing-a-new-input-plugin">
@@ -97,299 +101,6 @@ view. This is needed only when the satellite view cannot be expressed
 analytically (swath).</li>
 </ul>
 <p>Here is the example for the aapp1b reader plugin:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
- 10
- 11
- 12
- 13
- 14
- 15
- 16
- 17
- 18
- 19
- 20
- 21
- 22
- 23
- 24
- 25
- 26
- 27
- 28
- 29
- 30
- 31
- 32
- 33
- 34
- 35
- 36
- 37
- 38
- 39
- 40
- 41
- 42
- 43
- 44
- 45
- 46
- 47
- 48
- 49
- 50
- 51
- 52
- 53
- 54
- 55
- 56
- 57
- 58
- 59
- 60
- 61
- 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c"># Copyright (c) 2010.</span>
-
-<span class="c"># SMHI,</span>
-<span class="c"># Folkborgsvägen 1,</span>
-<span class="c"># Norrköping, </span>
-<span class="c"># Sweden</span>
-
-<span class="c"># Author(s):</span>
- 
-<span class="c">#   Martin Raspaud &lt;martin.raspaud@smhi.se&gt;</span>
-
-<span class="c"># This file is part of mpop.</span>
-
-<span class="c"># mpop is free software: you can redistribute it and/or modify it under the</span>
-<span class="c"># terms of the GNU General Public License as published by the Free Software</span>
-<span class="c"># Foundation, either version 3 of the License, or (at your option) any later</span>
-<span class="c"># version.</span>
-
-<span class="c"># mpop is distributed in the hope that it will be useful, but WITHOUT ANY</span>
-<span class="c"># WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR</span>
-<span class="c"># A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
-
-<span class="c"># You should have received a copy of the GNU General Public License along with</span>
-<span class="c"># mpop.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-<span class="sd">&quot;&quot;&quot;Interface to AAPP level 1b format. Uses the AHAMAP reader.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
-<span class="kn">from</span> <span class="nn">satin</span> <span class="kn">import</span> <span class="n">CONFIG_PATH</span>
-<span class="kn">import</span> <span class="nn">os.path</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">satin.logger</span> <span class="kn">import</span> <span class="n">LOG</span>
-
-<span class="c"># Using ahamap</span>
-<span class="kn">import</span> <span class="nn">avhrr</span>
-
-<span class="n">EPSILON</span> <span class="o">=</span> <span class="mf">0.001</span>
-
-<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">satscene</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Read data from file and load it into *satscene*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
-    <span class="n">conf</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CONFIG_PATH</span><span class="p">,</span> <span class="n">satscene</span><span class="o">.</span><span class="n">fullname</span> <span class="o">+</span> <span class="s">&quot;.cfg&quot;</span><span class="p">))</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">conf</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">satscene</span><span class="o">.</span><span class="n">instrument_name</span> <span class="o">+</span> <span class="s">&quot;-level2&quot;</span><span class="p">,</span>
-                                    <span class="n">raw</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
-        <span class="n">options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-    <span class="n">CASES</span><span class="p">[</span><span class="n">satscene</span><span class="o">.</span><span class="n">instrument_name</span><span class="p">](</span><span class="n">satscene</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">load_avhrr</span><span class="p">(</span><span class="n">satscene</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Read avhrr data from file and load it into *satscene*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">if</span> <span class="s">&quot;filename&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;No filename given, cannot load.&quot;</span><span class="p">)</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;orbit&quot;</span><span class="p">:</span> <span class="n">satscene</span><span class="o">.</span><span class="n">orbit</span><span class="p">,</span>
-              <span class="s">&quot;satname&quot;</span><span class="p">:</span> <span class="n">satscene</span><span class="o">.</span><span class="n">satname</span><span class="p">,</span>
-              <span class="s">&quot;number&quot;</span><span class="p">:</span> <span class="n">satscene</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
-              <span class="s">&quot;instrument&quot;</span><span class="p">:</span> <span class="n">satscene</span><span class="o">.</span><span class="n">instrument_name</span><span class="p">,</span>
-              <span class="s">&quot;fullname&quot;</span><span class="p">:</span> <span class="n">satscene</span><span class="o">.</span><span class="n">fullname</span>
-              <span class="p">}</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="n">options</span><span class="p">[</span><span class="s">&quot;dir&quot;</span><span class="p">],</span>
-        <span class="p">(</span><span class="n">satscene</span><span class="o">.</span><span class="n">time_slot</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s">&quot;filename&quot;</span><span class="p">])</span><span class="o">%</span><span class="n">values</span><span class="p">))</span>
-
-    <span class="n">file_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">satscene</span><span class="o">.</span><span class="n">time_slot</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;More than one l1b file matching!&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;No l1b file matching!: &quot;</span><span class="o">+</span>
-                      <span class="n">satscene</span><span class="o">.</span><span class="n">time_slot</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-
-    
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Loading from &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
-    
-    <span class="n">avh</span> <span class="o">=</span> <span class="n">avhrr</span><span class="o">.</span><span class="n">avhrr</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">avh</span><span class="o">.</span><span class="n">get_unprojected</span><span class="p">()</span>
-    <span class="n">instrument_data</span> <span class="o">=</span> <span class="n">avh</span><span class="o">.</span><span class="n">build_raw</span><span class="p">()</span>
-
-    <span class="n">available_channels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
-    <span class="n">data_channels</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="k">for</span> <span class="n">chn</span> <span class="ow">in</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-        <span class="n">channel_name</span> <span class="o">=</span> <span class="n">chn</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;channel_id&quot;</span><span class="p">][</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-        <span class="n">available_channels</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">([</span><span class="n">channel_name</span><span class="p">])</span>
-        <span class="n">data_channels</span><span class="p">[</span><span class="n">channel_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">chn</span><span class="o">.</span><span class="n">data</span>
-
-    <span class="k">for</span> <span class="n">chn</span> <span class="ow">in</span> <span class="n">satscene</span><span class="o">.</span><span class="n">channels_to_load</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">chn</span> <span class="ow">in</span> <span class="n">available_channels</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">chn</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;3A&quot;</span><span class="p">]:</span>
-                <span class="n">gain</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;vis_gain&quot;</span><span class="p">]</span>
-                <span class="n">intercept</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;vis_intercept&quot;</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">gain</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;ir_gain&quot;</span><span class="p">]</span>
-                <span class="n">intercept</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;ir_intercept&quot;</span><span class="p">]</span>
-
-            <span class="n">chn_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_channels</span><span class="p">[</span><span class="n">chn</span><span class="p">])</span>
-            <span class="n">missing_data</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;missing_data&quot;</span><span class="p">]</span>
-            <span class="n">chn_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_inside</span><span class="p">(</span><span class="n">chn_array</span><span class="p">,</span>
-                                            <span class="n">missing_data</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="p">,</span>
-                                            <span class="n">missing_data</span> <span class="o">+</span> <span class="n">EPSILON</span><span class="p">)</span>
-
-            <span class="n">no_data</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;nodata&quot;</span><span class="p">]</span>
-            <span class="n">chn_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_inside</span><span class="p">(</span><span class="n">chn_array</span><span class="p">,</span>
-                                            <span class="n">no_data</span> <span class="o">-</span> <span class="n">EPSILON</span><span class="p">,</span>
-                                            <span class="n">no_data</span> <span class="o">+</span> <span class="n">EPSILON</span><span class="p">)</span>
-
-            <span class="n">satscene</span><span class="p">[</span><span class="n">chn</span><span class="p">]</span> <span class="o">=</span> <span class="n">chn_array</span>
-            <span class="n">satscene</span><span class="p">[</span><span class="n">chn</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span>  <span class="n">satscene</span><span class="p">[</span><span class="n">chn</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="n">intercept</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Channel &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chn</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; not available, not loaded.&quot;</span><span class="p">)</span>
-
-    <span class="n">satscene</span><span class="o">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">latdata</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">180</span>
-    <span class="n">satscene</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">instrument_data</span><span class="o">.</span><span class="n">londata</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">180</span>
-
-
-<span class="k">def</span> <span class="nf">get_lat_lon</span><span class="p">(</span><span class="n">satscene</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Read lat and lon.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">del</span> <span class="n">resolution</span>
-    
-    <span class="k">return</span> <span class="n">LAT_LON_CASES</span><span class="p">[</span><span class="n">satscene</span><span class="o">.</span><span class="n">instrument_name</span><span class="p">](</span><span class="n">satscene</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_lat_lon_avhrr</span><span class="p">(</span><span class="n">satscene</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Read lat and lon.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">del</span> <span class="n">options</span>
-    
-    <span class="k">return</span> <span class="n">satscene</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">satscene</span><span class="o">.</span><span class="n">lon</span>
-
-
-<span class="n">LAT_LON_CASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&quot;avhrr&quot;</span><span class="p">:</span> <span class="n">get_lat_lon_avhrr</span>
-    <span class="p">}</span>
-
-<span class="n">CASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&quot;avhrr&quot;</span><span class="p">:</span> <span class="n">load_avhrr</span>
-    <span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
 <p>Here is the example for the aapp1b reader plugin:</p>
 <div class="highlight-ini"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -403,7 +114,7 @@ analytically (swath).</li>
 </div>
 <div class="section" id="adding-an-instrument">
 <h2>Adding an instrument<a class="headerlink" href="#adding-an-instrument" title="Permalink to this headline">¶</a></h2>
-<p>In <tt class="xref py py-mod docutils literal"><span class="pre">pp.instrument</span></tt> directory, one has to add a channel list and an
+<p>In <tt class="xref py py-mod docutils literal"><span class="pre">mpop.instrument</span></tt> directory, one has to add a channel list and an
 instrument name in a child class from visir. For example, for the AVHRR
 instrument:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -528,10 +239,10 @@ instrument:</p>
 
 <span class="sd">&quot;&quot;&quot;This modules describes the avhrr instrument.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">mpop.channel</span> <span class="kn">import</span> <span class="n">NotLoadedError</span>
+<span class="kn">from</span> <span class="nn">mpop.imageo</span> <span class="kn">import</span> <span class="n">geo_image</span>
+<span class="kn">from</span> <span class="nn">mpop.instruments.visir</span> <span class="kn">import</span> <span class="n">VisirScene</span>
 
-<span class="kn">from</span> <span class="nn">pp.instruments.visir</span> <span class="kn">import</span> <span class="n">VisirScene</span>
-<span class="kn">from</span> <span class="nn">pp.channel</span> <span class="kn">import</span> <span class="n">NotLoadedError</span>
-<span class="kn">from</span> <span class="nn">imageo</span> <span class="kn">import</span> <span class="n">geo_image</span>
 
 <span class="n">AVHRR</span> <span class="o">=</span> <span class="p">[[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">0.635</span><span class="p">,</span> <span class="mf">0.68</span><span class="p">),</span> <span class="mi">1090</span><span class="p">],</span>
          <span class="p">[</span><span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.725</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">),</span> <span class="mi">1090</span><span class="p">],</span>
@@ -598,7 +309,7 @@ instrument:</p>
 </div>
 <div class="section" id="adding-a-satellite">
 <h2>Adding a satellite<a class="headerlink" href="#adding-a-satellite" title="Permalink to this headline">¶</a></h2>
-<p>In the <tt class="xref py py-mod docutils literal"><span class="pre">pp.satellite</span></tt> directory, add the definition of the satellite as a
+<p>In the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.satellite</span></tt> directory, add the definition of the satellite as a
 child class of the instrument of interest. For example here is the noaa17
 satellite definition:</p>
 <p>One should also link to the desired input format through a configuration file

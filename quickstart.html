@@ -23,7 +23,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
-    <link rel="next" title="Making use of mpop: the pp package" href="pp.html" />
+    <link rel="next" title="Making use of the mpop package" href="pp.html" />
     <link rel="prev" title="Installation instructions" href="install.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pp.html" title="Making use of mpop: the pp package"
+          <a href="pp.html" title="Making use of the mpop package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="install.html" title="Installation instructions"
@@ -65,7 +65,7 @@
                         title="previous chapter">Installation instructions</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pp.html"
-                        title="next chapter">Making use of mpop: the <tt class="docutils literal docutils literal docutils literal"><span class="pre">pp</span></tt> package</a></p>
+                        title="next chapter">Making use of the <tt class="docutils literal docutils literal docutils literal"><span class="pre">mpop</span></tt> package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/quickstart.txt"
@@ -101,7 +101,7 @@ source <cite>etc</cite> directory.</p>
 <div class="section" id="first-example">
 <h2>First example<a class="headerlink" href="#first-example" title="Permalink to this headline">¶</a></h2>
 <p>Ok, let&#8217;s get it on:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pp.satellites</span> <span class="kn">import</span> <span class="n">get_satellite_class</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpop.satellites</span> <span class="kn">import</span> <span class="n">get_satellite_class</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">datetime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_slot</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_satellite_class</span><span class="p">(</span><span class="s">&quot;meteosat&quot;</span><span class="p">,</span> <span class="s">&quot;09&quot;</span><span class="p">)</span>
@@ -144,7 +144,7 @@ channels based on its name.</p>
 <p>Once the channels are loaded, we generate an overview RGB composite image, and
 save it as a png image. Instead of <tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt>, one could also use
 <tt class="xref py py-meth docutils literal"><span class="pre">show()</span></tt> if the only purpose is to display the image on screen.</p>
-<p>Available composites are listed in the <tt class="xref py py-mod docutils literal"><span class="pre">pp.satellites.visir</span></tt> module
+<p>Available composites are listed in the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.satellites.visir</span></tt> module
 in the mpop documentation.</p>
 </div>
 <div class="section" id="we-want-more">
@@ -306,7 +306,7 @@ and we can operate as before to generate and play with RGB composites:</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pp.html" title="Making use of mpop: the pp package"
+          <a href="pp.html" title="Making use of the mpop package"
              >next</a> |</li>
         <li class="right" >
           <a href="install.html" title="Installation instructions"
