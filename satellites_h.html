@@ -212,34 +212,7 @@
 
 </div>
 <div class="section" id="projecting-the-mpop-projector-module">
-<h2>Projecting: the <a class="reference internal" href="#module-mpop.projector" title="mpop.projector"><tt class="xref py py-mod docutils literal"><span class="pre">mpop.projector</span></tt></a> module<a class="headerlink" href="#projecting-the-mpop-projector-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-mpop.projector"></span><p>This module handles coverage objects. Such objects are used to
-transform area projected data by changing either the area or the
-projection or both. A typical usage is to transform one large area in
-satellite projection to an area of interest in polar projection for
-example.</p>
-<dl class="class">
-<dt id="mpop.projector.Projector">
-<em class="property">class </em><tt class="descclassname">mpop.projector.</tt><tt class="descname">Projector</tt><big>(</big><em>in_area</em>, <em>out_area</em>, <em>in_latlons=None</em>, <em>mode='quick'</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class define projector objects. They contain the mapping
-information necessary for projection purposes. For efficiency reasons,
-generated projectors can be saved to disk for later reuse. Use the
-<a class="reference internal" href="#mpop.projector.Projector.save" title="mpop.projector.Projector.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method for this.</p>
-<dl class="method">
-<dt id="mpop.projector.Projector.project_array">
-<tt class="descname">project_array</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector.project_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Project an array <em>data</em> along the given Projector object.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="mpop.projector.Projector.save">
-<tt class="descname">save</tt><big>(</big><em>resave=False</em><big>)</big><a class="headerlink" href="#mpop.projector.Projector.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the precomputation to disk, and overwrite existing file in case
-<em>resave</em> is true.</p>
-</dd></dl>
-
-</dd></dl>
-
+<h2>Projecting: the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.projector</span></tt> module<a class="headerlink" href="#projecting-the-mpop-projector-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-mpop.instruments.seviri">
 <span id="the-seviri-instrument"></span><h2>The Seviri instrument<a class="headerlink" href="#module-mpop.instruments.seviri" title="Permalink to this headline">¶</a></h2>

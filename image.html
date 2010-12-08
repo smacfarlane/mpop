@@ -189,7 +189,7 @@ that is if the current image has missing data.</p>
 
 <dl class="method">
 <dt id="mpop.imageo.image.Image.pil_save">
-<tt class="descname">pil_save</tt><big>(</big><em>filename</em>, <em>compression=6</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.pil_save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">pil_save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>format=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.pil_save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em> using PIL. For now, the
 compression level [0-9] is ignored, due to PIL&#8217;s lack of support. See
 also <a class="reference internal" href="#mpop.imageo.image.Image.save" title="mpop.imageo.image.Image.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a>.</p>
@@ -221,7 +221,7 @@ shape.</p>
 
 <dl class="method">
 <dt id="mpop.imageo.image.Image.save">
-<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=6</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>format=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em>.</p>
 </dd></dl>
 
@@ -284,7 +284,7 @@ equalization on channel <em>ch_nb</em>.</p>
 
 <dl class="method">
 <dt id="mpop.imageo.image.Image.terragon_save">
-<tt class="descname">terragon_save</tt><big>(</big><em>filename</em>, <em>compression</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.terragon_save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">terragon_save</tt><big>(</big><em>filename</em>, <em>compression=None</em>, <em>format=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.terragon_save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em> in terragon format.</p>
 </dd></dl>
 
@@ -330,8 +330,19 @@ file.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="mpop.imageo.geo_image.GeoImage.geotiff_save">
+<tt class="descname">geotiff_save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>geotransform=None</em>, <em>spatialref=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.geotiff_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the image to the given <em>filename</em> in <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, with the
+<em>compression</em> level in [0, 9]. 0 means not compressed. The <em>tags</em>
+argument is a dict of tags to include in the image (as metadata).
+By default it uses the &#8216;area&#8217; instance to generate geotransform and spatialref
+information, this can be overwritte by the arguments <em>geotransform</em> and
+<em>spatialref</em>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="mpop.imageo.geo_image.GeoImage.save">
-<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=0</em>, <em>tags=None</em>, <em>gdal_options=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=0</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>format=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em>. If the extension is &#8220;tif&#8221;,
 the image is saved to <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, in which case the <em>compression</em>
 level can be given ([0, 9], 0 meaning off). See also
