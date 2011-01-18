@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation instructions &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Quickstart" href="quickstart.html" />
+    <link rel="prev" title="Welcome to MPoP’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to MPoP’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation instructions</a><ul>
+<li><a class="reference internal" href="#getting-the-files-and-installing-them">Getting the files and installing them</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#environment-variables">Environment variables</a></li>
+<li><a class="reference internal" href="#input-data-directories">Input data directories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to MPoP&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="next chapter">Quickstart</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation-instructions">
+<h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-the-files-and-installing-them">
+<h2>Getting the files and installing them<a class="headerlink" href="#getting-the-files-and-installing-them" title="Permalink to this headline">¶</a></h2>
+<p>First you need to get the files from github:</p>
+<div class="highlight-python"><pre>cd /path/to/my/source/directory/
+git clone git://github.com/mraspaud/mpop.git</pre>
+</div>
+<p>You can also retreive a tarball from there if you prefer, then run:</p>
+<div class="highlight-python"><pre>tar zxvf tarball.tar.gz</pre>
+</div>
+<p>Then you need to install mpop on you computer:</p>
+<div class="highlight-python"><pre>cd mpop
+python setup.py install [--prefix=/my/custom/installation/directory]</pre>
+</div>
+<p>You can also install it in develop mode to make it easier to hack:</p>
+<div class="highlight-python"><pre>python setup.py develop [--prefix=/my/custom/installation/directory]</pre>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="environment-variables">
+<h3>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>Environment variables which are needed for mpop are the <cite>PYTHONPATH</cite> of course,
+and the <cite>PPP_CONFIG_DIR</cite>, which is the directory where the configuration files
+are to be found. If the latter is not defined, the <cite>etc</cite> directory of the mpop
+installation is used.</p>
+</div>
+<div class="section" id="input-data-directories">
+<h3>Input data directories<a class="headerlink" href="#input-data-directories" title="Permalink to this headline">¶</a></h3>
+<p>The input data directories are setup in the satellite configuration files,
+which can be found in the <cite>PPP_CONFIG_DIR</cite> directory (some template files are
+provided with mpop in the <cite>etc</cite> directory):</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[seviri-level1]</span>
+<span class="na">format</span> <span class="o">=</span> <span class="s">&#39;xrit/MSG&#39;</span>
+<span class="na">dir</span><span class="o">=</span><span class="s">&#39;/data/geo_in&#39;</span>
+<span class="na">filename</span><span class="o">=</span><span class="s">&#39;H-000-MSG?__-MSG?________-%(channel)s-%(segment)s-%Y%m%d%H%M-__&#39;</span>
+<span class="na">filename_pro</span><span class="o">=</span><span class="s">&#39;H-000-MSG?__-MSG?________-_________-%(segment)s-%Y%m%d%H%M-__&#39;</span>
+<span class="na">filename_epi</span><span class="o">=</span><span class="s">&#39;H-000-MSG?__-MSG?________-_________-%(segment)s-%Y%m%d%H%M-__&#39;</span>
+
+
+<span class="k">[seviri-level2]</span>
+<span class="na">format</span><span class="o">=</span><span class="s">&#39;mipp&#39;</span>
+</pre></div>
+</div>
+<p>The different levels indicate different steps of the reading. The <cite>level2</cite>
+section gives at least the plugin to read the data with. In some cases, the
+data is first read from another level, as is this case with HRIT/LRIT data when
+we use <a class="reference external" href="http://www.github.com/loerum/mipp">mipp</a>: there we use the <cite>level1</cite> section.</p>
+<p>The data location is generally dealt in to parts: the directory and the
+filename. There can also be additional filenames depending on the reader
+plugin: here, mipp needs also the filename for prologue and epilogue files.</p>
+<p>Note that the section starts with the name of the instrument. This is important
+in the case where several instruments are available for the same satellite.
+Note also that the filename can contain wildcards (<cite>*</cite> and <cite>?</cite>) and optional
+values (here channel, segment, and time markers). It is up to the input plugin
+to handle these constructs if needed.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to MPoP’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

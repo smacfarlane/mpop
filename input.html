@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Input plugins: the mpop.satin package &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Geographic images" href="image.html" />
+    <link rel="prev" title="Making use of the mpop package" href="pp.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Geographic images"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pp.html" title="Making use of the mpop package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Input plugins: the <tt class="docutils literal"><span class="pre">mpop.satin</span></tt> package</a><ul>
+<li><a class="reference internal" href="#available-plugins">Available plugins</a></li>
+<li><a class="reference internal" href="#adding-a-new-plugin">Adding a new plugin</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pp.html"
+                        title="previous chapter">Making use of the <tt class="docutils literal"><span class="pre">mpop</span></tt> package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="image.html"
+                        title="next chapter">Geographic images</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/input.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="input-plugins-the-mpop-satin-package">
+<h1>Input plugins: the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.satin</span></tt> package<a class="headerlink" href="#input-plugins-the-mpop-satin-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="available-plugins">
+<h2>Available plugins<a class="headerlink" href="#available-plugins" title="Permalink to this headline">¶</a></h2>
+<p>The available input plugins are:</p>
+<ul class="simple">
+<li><em>mipp</em> for hrit/lrit formats</li>
+<li><em>aapp1b</em> for aapp level 1b format</li>
+<li><em>eps_format</em> for eps level 1b format</li>
+<li><em>hrpt</em> to read level 0 hrpt format (experimental)</li>
+</ul>
+</div>
+<div class="section" id="adding-a-new-plugin">
+<h2>Adding a new plugin<a class="headerlink" href="#adding-a-new-plugin" title="Permalink to this headline">¶</a></h2>
+<p>The interface of any reader plugin must include the <tt class="xref py py-func docutils literal"><span class="pre">load()</span></tt> function and
+optionally the <tt class="xref py py-func docutils literal"><span class="pre">get_lon_lat()</span></tt> function.</p>
+<ul class="simple">
+<li><tt class="xref py py-func docutils literal"><span class="pre">load()</span></tt>: loads the calibrated data into the channels.</li>
+<li><tt class="xref py py-func docutils literal"><span class="pre">get_lat_lon()</span></tt>: returns the latitude and longitude of the satellite
+view. This is needed only when the satellite view cannot be expressed
+analytically (swath).</li>
+</ul>
+<p>Take a look at the existing readers for more insight.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Geographic images"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pp.html" title="Making use of the mpop package"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to MPoP’s documentation! &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="#" />
+    <link rel="next" title="Installation instructions" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation instructions"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to MPoP&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="next chapter">Installation instructions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-mpop-s-documentation">
+<h1>Welcome to MPoP&#8217;s documentation!<a class="headerlink" href="#welcome-to-mpop-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The Meteorological Post-Processing package is a python library for generating
+RGB products for meteorological remote sensing. As such it can create RGB
+composites directly from satellite instrument channels, or take advantage of
+precomputed PGEs.</p>
+<p>Get to the <a class="reference external" href="http://github.com/mraspaud/mpop">project</a> page, with source and downloads.</p>
+<p>It is designed to be easily extendable to support any meteorological satellite
+by the creation of plugins. In the base distribution, we provide support for
+Meteosat 7, 8, 9, MTSAT1R, MTSAT2, GOES 11, GOES 12, GOES 13 through the use of
+<a class="reference external" href="http://github.com/loerum/mipp">mipp</a>, and Noaa 15, 16, 17, 18, 19, and Metop A through the use of aapp and
+ahamap.</p>
+<p>Reprojection of data is also available through the use of <a class="reference external" href="http://pyresample.googlecode.com">pyresample</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#getting-the-files-and-installing-them">Getting the files and installing them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#first-example">First example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#we-want-more">We want more !</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#retrieving-channels">Retrieving channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#channel-arithmetics">Channel arithmetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pges">PGEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#making-custom-composites">Making custom composites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#projections">Projections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pp.html">Making use of the <tt class="docutils literal"><span class="pre">mpop</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#conventions-about-satellite-names">Conventions about satellite names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#creating-a-scene-object">Creating a scene object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#loading-the-data">Loading the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#re-projecting-data">Re-projecting data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#geo-localisation-of-the-data">Geo-localisation of the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#image-composites">Image composites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#adding-a-new-satellite-configuration-file">Adding a new satellite: configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#adding-a-new-satellite-python-code">Adding a new satellite: python code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pp.html#the-mpop-api">The <tt class="docutils literal"><span class="pre">mpop</span></tt> API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Input plugins: the <tt class="docutils literal"><span class="pre">mpop.satin</span></tt> package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input.html#available-plugins">Available plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#adding-a-new-plugin">Adding a new plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image.html">Geographic images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image.html#module-mpop.imageo.image">Simple images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image.html#module-mpop.imageo.geo_image">Geographically enriched images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="saturn.html">Tools for batch production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="saturn.html#module-mpop.saturn.runner">Running stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saturn.html#module-mpop.saturn.tasklist">Handling tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saturn.html#module-mpop.saturn.filewatcher">Monitoring and processing incoming files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saturn.html#module-mpop.saturn.assemble_segments">Earth geometry</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation instructions"
+             >next</a> |</li>
+        <li><a href="#">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

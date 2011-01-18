@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tools for batch production &mdash; mpop v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mpop v0.9.0 documentation" href="index.html" />
+    <link rel="prev" title="Geographic images" href="image.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Geographic images"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tools for batch production</a><ul>
+<li><a class="reference internal" href="#module-mpop.saturn.runner">Running stuff</a></li>
+<li><a class="reference internal" href="#module-mpop.saturn.tasklist">Handling tasks</a></li>
+<li><a class="reference internal" href="#module-mpop.saturn.filewatcher">Monitoring and processing incoming files</a></li>
+<li><a class="reference internal" href="#module-mpop.saturn.assemble_segments">Earth geometry</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="image.html"
+                        title="previous chapter">Geographic images</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/saturn.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tools-for-batch-production">
+<h1>Tools for batch production<a class="headerlink" href="#tools-for-batch-production" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mpop.saturn.runner">
+<span id="running-stuff"></span><h2>Running stuff<a class="headerlink" href="#module-mpop.saturn.runner" title="Permalink to this headline">¶</a></h2>
+<p>Batch run stuff.</p>
+<dl class="class">
+<dt id="mpop.saturn.runner.SequentialRunner">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.runner.</tt><tt class="descname">SequentialRunner</tt><big>(</big><em>satellite</em>, <em>tasklist</em>, <em>precompute=False</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs scenes in a sequential order, as opposed to parallelized running.</p>
+<dl class="method">
+<dt id="mpop.saturn.runner.SequentialRunner.run_from_cmd">
+<tt class="descname">run_from_cmd</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner.run_from_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch run mpop.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.runner.SequentialRunner.run_from_data">
+<tt class="descname">run_from_data</tt><big>(</big><em>tasklist=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner.run_from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run on given data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.runner.SequentialRunner.run_from_local_data">
+<tt class="descname">run_from_local_data</tt><big>(</big><em>tasklist=None</em>, <em>extra_tags=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner.run_from_local_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run on given local data (already projected).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.runner.parse_options">
+<tt class="descclassname">mpop.saturn.runner.</tt><tt class="descname">parse_options</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.runner.parse_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse command line options.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.runner.usage">
+<tt class="descclassname">mpop.saturn.runner.</tt><tt class="descname">usage</tt><big>(</big><em>scriptname</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print usefull information for running the script.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mpop.saturn.tasklist">
+<span id="handling-tasks"></span><h2>Handling tasks<a class="headerlink" href="#module-mpop.saturn.tasklist" title="Permalink to this headline">¶</a></h2>
+<p>Tasklist class and helper function.</p>
+<dl class="class">
+<dt id="mpop.saturn.tasklist.TaskList">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.tasklist.</tt><tt class="descname">TaskList</tt><big>(</big><em>product_file=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.tasklist.TaskList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a tasklist.</p>
+<dl class="method">
+<dt id="mpop.saturn.tasklist.TaskList.get_prerequisites">
+<tt class="descname">get_prerequisites</tt><big>(</big><em>klass</em>, <em>area_id=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.tasklist.TaskList.get_prerequisites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the channels we need to load to fulfill the tasklist according
+to methods defined in <em>klass</em>. If area is provided, account only for
+tasks on this area.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.tasklist.TaskList.shape">
+<tt class="descname">shape</tt><big>(</big><em>klass</em>, <em>mode=set([])</em>, <em>original_areas=set([])</em>, <em>specific_composites=set([])</em><big>)</big><a class="headerlink" href="#mpop.saturn.tasklist.TaskList.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape the given the tasklist according to the options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.tasklist.TaskList.split">
+<tt class="descname">split</tt><big>(</big><em>*keys</em><big>)</big><a class="headerlink" href="#mpop.saturn.tasklist.TaskList.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the tasklist along the <em>keys</em> parameter: keys in the first
+part, non keys in the second.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.tasklist.get_product_list">
+<tt class="descclassname">mpop.saturn.tasklist.</tt><tt class="descname">get_product_list</tt><big>(</big><em>satscene</em><big>)</big><a class="headerlink" href="#mpop.saturn.tasklist.get_product_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the tasklist corresponding to the satellite described in
+<em>satscene</em>, which can be a scene object, a list or a tuple. If the
+corresponding file could not be found, the function returns more generic
+tasklists (variant and name based, then only variant based), or None if no
+file can be found.</p>
+<p>NB: the product files are looked for in the CONFIG_PATH directory.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mpop.saturn.filewatcher">
+<span id="monitoring-and-processing-incoming-files"></span><h2>Monitoring and processing incoming files<a class="headerlink" href="#module-mpop.saturn.filewatcher" title="Permalink to this headline">¶</a></h2>
+<p>Watch files coming in a given directory.</p>
+<dl class="class">
+<dt id="mpop.saturn.filewatcher.FileProcessor">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.filewatcher.</tt><tt class="descname">FileProcessor</tt><big>(</big><em>file_queue</em>, <em>fun</em>, <em>refresh=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute <em>fun</em> on filenames provided by from <em>file_queue</em>. If <em>refresh</em>
+is a positive number, run <em>fun</em> every given number of seconds with None as
+argument.</p>
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileProcessor.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileProcessor.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the given function on files from the file queue.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileProcessor.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileProcessor.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops a running process.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mpop.saturn.filewatcher.FileWatcher">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.filewatcher.</tt><tt class="descname">FileWatcher</tt><big>(</big><em>filename_template</em>, <em>file_queue</em>, <em>frequency</em><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileWatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for new files, and queues them.</p>
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileWatcher.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileWatcher.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the file watcher.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mpop.saturn.assemble_segments">
+<span id="earth-geometry"></span><h2>Earth geometry<a class="headerlink" href="#module-mpop.saturn.assemble_segments" title="Permalink to this headline">¶</a></h2>
+<p>Spherical geometry module.</p>
+<dl class="class">
+<dt id="mpop.saturn.assemble_segments.Arc">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">Arc</tt><big>(</big><em>start</em>, <em>end</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc" title="Permalink to this definition">¶</a></dt>
+<dd><p>An arc of the great circle between two points.</p>
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Arc.angle">
+<tt class="descname">angle</tt><big>(</big><em>other_arc</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc.angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Oriented angle between two arcs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Arc.center_angle">
+<tt class="descname">center_angle</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc.center_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Angle of an arc at the center of the sphere.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Arc.intersection">
+<tt class="descname">intersection</tt><big>(</big><em>other_arc</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Says where, if two arcs defined by the current arc and the
+<em>other_arc</em> intersect. An arc is defined as the shortest tracks between
+two points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Arc.intersections">
+<tt class="descname">intersections</tt><big>(</big><em>other_arc</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc.intersections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives the two intersections of the greats circles defined by the 
+current arc and <em>other_arc</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Arc.intersects">
+<tt class="descname">intersects</tt><big>(</big><em>other_arc</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Arc.intersects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Says if two arcs defined by the current arc and the <em>other_arc</em>
+intersect. An arc is defined as the shortest tracks between two points.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mpop.saturn.assemble_segments.Coordinate">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">Coordinate</tt><big>(</big><em>lat=None</em>, <em>lon=None</em>, <em>x__=None</em>, <em>y__=None</em>, <em>z__=None</em>, <em>R=1</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Point on earth in terms of lat and lon.</p>
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.cross">
+<tt class="descname">cross</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.cross" title="Permalink to this definition">¶</a></dt>
+<dd><p>cross product with another vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.cross2cart">
+<tt class="descname">cross2cart</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.cross2cart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cross product, and convert to cartesian coordinates
+(assuming radius 1).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.distance">
+<tt class="descname">distance</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vincenty formula.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.dot">
+<tt class="descname">dot</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>dot product with another vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.norm">
+<tt class="descname">norm</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the norm of the vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.Coordinate.normalize">
+<tt class="descname">normalize</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.Coordinate.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>normalize the vector.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry">
+<em class="property">class </em><tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">TestSphereGeometry</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Testing sphere geometry from this module.</p>
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry.test_angle">
+<tt class="descname">test_angle</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry.test_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Testing the angle value between two arcs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry.test_inside">
+<tt class="descname">test_inside</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry.test_inside" title="Permalink to this definition">¶</a></dt>
+<dd><p>Testing if a point is inside for other points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry.test_intersects">
+<tt class="descname">test_intersects</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry.test_intersects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if two arcs intersect.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry.test_overlap_rate">
+<tt class="descname">test_overlap_rate</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry.test_overlap_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test how much two areas overlap.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.assemble_segments.TestSphereGeometry.test_overlaps">
+<tt class="descname">test_overlaps</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.TestSphereGeometry.test_overlaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if two areas overlap.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.get_area">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">get_area</tt><big>(</big><em>corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.get_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the area of the convex area defined by <em>corners</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.get_first_intersection">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">get_first_intersection</tt><big>(</big><em>b__</em>, <em>boundaries</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.get_first_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first intersection on <em>b__</em> with <em>boundaries</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.get_intersections">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">get_intersections</tt><big>(</big><em>b__</em>, <em>boundaries</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.get_intersections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the intersections of <em>b__</em> with <em>boundaries</em>.
+Returns both the intersection coordinates and the concerned boundaries.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.get_next_intersection">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">get_next_intersection</tt><big>(</big><em>p__</em>, <em>b__</em>, <em>boundaries</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.get_next_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the next intersection from the intersection of arcs <em>p__</em> and <em>b__</em>
+along segment <em>b__</em> with <em>boundaries</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.min_distances">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">min_distances</tt><big>(</big><em>area_corners</em>, <em>segment_corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.min_distances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Min distances between each corner of <em>area_corners</em> and
+<em>segment_corners</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.modpi">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">modpi</tt><big>(</big><em>val</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.modpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts <em>val</em> between -pi and pi.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.modpi2">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">modpi2</tt><big>(</big><em>val</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.modpi2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts <em>val</em> between 0 and 2pi.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.overlap_rate">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">overlap_rate</tt><big>(</big><em>swath_corners</em>, <em>area_corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.overlap_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get how much a swath overlaps an area.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.overlaps">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">overlaps</tt><big>(</big><em>area_corners</em>, <em>segment_corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.overlaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are two areas overlapping ? This uses great circle arcs as area
+boundaries.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.point_inside">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">point_inside</tt><big>(</big><em>point</em>, <em>corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.point_inside" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is a point inside the 4 corners ? This uses great circle arcs as area
+boundaries.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.polygon">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">polygon</tt><big>(</big><em>area_corners</em>, <em>segment_corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.polygon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the intersection polygon between two areas.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.saturn.assemble_segments.should_wait">
+<tt class="descclassname">mpop.saturn.assemble_segments.</tt><tt class="descname">should_wait</tt><big>(</big><em>area_corners</em>, <em>segment_corners</em>, <em>previous_segment_corners</em><big>)</big><a class="headerlink" href="#mpop.saturn.assemble_segments.should_wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are the newest cornest still inside the area ? is the last segment
+boundary overlapping any boundary of the area ? In this case we should wait
+for the next segment to arrive.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="image.html" title="Geographic images"
+             >previous</a> |</li>
+        <li><a href="index.html">mpop v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2010, SMHI.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
