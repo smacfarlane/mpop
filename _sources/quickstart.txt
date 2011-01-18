@@ -162,6 +162,10 @@ Channel arithmetics
 .. versionadded:: 0.10.0
    Channel arithmetics added.
 
+The common arithmetical operators are supported on channels, so that one can
+run for example::
+
+  >>> cool_channel = (global_data[0.6] - global_data[0.8]) * global_data[10.8]
 
 PGEs
 ====

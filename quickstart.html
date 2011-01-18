@@ -66,7 +66,7 @@
                         title="previous chapter">Installation instructions</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pp.html"
-                        title="next chapter">Making use of the <tt class="docutils literal docutils literal docutils literal"><span class="pre">mpop</span></tt> package</a></p>
+                        title="next chapter">Making use of the <tt class="docutils literal"><span class="pre">mpop</span></tt> package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/quickstart.txt"
@@ -240,6 +240,11 @@ data property:</p>
 <h2>Channel arithmetics<a class="headerlink" href="#channel-arithmetics" title="Permalink to this headline">¶</a></h2>
 <p class="versionadded">
 <span class="versionmodified">New in version 0.10.0: </span>Channel arithmetics added.</p>
+<p>The common arithmetical operators are supported on channels, so that one can
+run for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cool_channel</span> <span class="o">=</span> <span class="p">(</span><span class="n">global_data</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span> <span class="o">-</span> <span class="n">global_data</span><span class="p">[</span><span class="mf">0.8</span><span class="p">])</span> <span class="o">*</span> <span class="n">global_data</span><span class="p">[</span><span class="mf">10.8</span><span class="p">]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="pges">
 <h2>PGEs<a class="headerlink" href="#pges" title="Permalink to this headline">¶</a></h2>
