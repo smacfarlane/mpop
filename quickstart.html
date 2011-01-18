@@ -111,7 +111,6 @@ source <cite>etc</cite> directory.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span> <span class="o">=</span> <span class="n">GeostationaryFactory</span><span class="o">.</span><span class="n">create_scene</span><span class="p">(</span><span class="s">&quot;meteosat&quot;</span><span class="p">,</span> <span class="s">&quot;09&quot;</span><span class="p">,</span> <span class="s">&quot;seviri&quot;</span><span class="p">,</span> <span class="n">time_slot</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">europe</span> <span class="o">=</span> <span class="n">get_area_def</span><span class="p">(</span><span class="s">&quot;EuropeCanary&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span><span class="o">.</span><span class="n">load</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">],</span> <span class="n">area_extent</span><span class="o">=</span><span class="n">europe</span><span class="o">.</span><span class="n">area_extent</span><span class="p">)</span>
-<span class="go">Warning: divide by zero encountered in divide</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span>
 <span class="go">&#39;IR_097: (9.380,9.660,9.940)μm, resolution 3000.40316582m, not loaded&#39;</span>
 <span class="go">&#39;IR_016: (1.500,1.640,1.780)μm, resolution 3000.40316582m, not loaded&#39;</span>
@@ -163,7 +162,7 @@ result in an error:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">global_data</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">natural</span><span class="p">()</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
-<span class="gr">mpop.channel.NotLoadedError</span>: <span class="n">Required channel 1.63 not loaded, aborting.</span>
+<span class="gr">NotLoadedError</span>: <span class="n">Required channel 1.63 not loaded, aborting.</span>
 </pre></div>
 </div>
 <p>So it means that we have to load the missing channel first. To do this we could
@@ -194,22 +193,22 @@ prerequisites are python sets, you can do:</p>
 <h2>Retrieving channels<a class="headerlink" href="#retrieving-channels" title="Permalink to this headline">¶</a></h2>
 <p>Retrieving channels is dead easy. From the center wavelength:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span>
-<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000m&#39;</span>
+<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000.40316582m&#39;</span>
 </pre></div>
 </div>
 <p>or from the channel name:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span><span class="p">[</span><span class="s">&quot;VIS006&quot;</span><span class="p">]</span>
-<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000m&#39;</span>
+<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000.40316582m&#39;</span>
 </pre></div>
 </div>
 <p>or from the resolution:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span><span class="p">[</span><span class="mi">3000</span><span class="p">]</span>
-<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000m&#39;</span>
+<span class="go">&#39;VIS006: (0.560,0.635,0.710)μm, shape (1200, 3000), resolution 3000.40316582m&#39;</span>
 </pre></div>
 </div>
 <p>or more than one at the time:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span><span class="p">[</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
-<span class="go">&#39;VIS008: (0.740,0.810,0.880)μm, shape (1200, 3000), resolution 3000m&#39;</span>
+<span class="go">&#39;VIS008: (0.740,0.810,0.880)μm, shape (1200, 3000), resolution 3000.40316582m&#39;</span>
 </pre></div>
 </div>
 <p>The printed lines consists of the following values:</p>
@@ -250,13 +249,14 @@ run for example:</p>
 <h2>PGEs<a class="headerlink" href="#pges" title="Permalink to this headline">¶</a></h2>
 <p>From the satellite data PGEs <a class="footnote-reference" href="#f1" id="id1">[1]</a> are generated by the accompanying program.
 The loading procedure for PGEs is exactly the same as with regular channels:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span><span class="o">.</span><span class="n">load</span><span class="p">([</span><span class="s">&quot;CTTH&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s">&quot;EuropeCanary&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">global_data</span><span class="o">.</span><span class="n">load</span><span class="p">([</span><span class="s">&quot;CTTH&quot;</span><span class="p">])</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 <p>and they can be retrieved as simply as before:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">global_data</span><span class="p">[</span><span class="s">&quot;CTTH&quot;</span><span class="p">]</span>
-<span class="go">&#39;CTTH: shape (1200, 3000), resolution 3000m&#39;</span>
+<span class="go">&#39;CTTH: shape (1200, 3000), resolution 3000.40316582m&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -264,7 +264,7 @@ The loading procedure for PGEs is exactly the same as with regular channels:</p>
 <h2>Making custom composites<a class="headerlink" href="#making-custom-composites" title="Permalink to this headline">¶</a></h2>
 <p>Building custom composites makes use of the <tt class="xref py py-mod docutils literal"><span class="pre">imageo</span></tt> module. For example,
 building an overview composite can be done manually with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">imageo.geo_image</span> <span class="kn">import</span> <span class="n">GeoImage</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpop.imageo.geo_image</span> <span class="kn">import</span> <span class="n">GeoImage</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">GeoImage</span><span class="p">((</span><span class="n">global_data</span><span class="p">[</span><span class="mf">0.6</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">global_data</span><span class="p">[</span><span class="mf">0.8</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="o">-</span><span class="n">global_data</span><span class="p">[</span><span class="mf">10.8</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
@@ -304,6 +304,8 @@ Here is an example of such a module:</p>
     <span class="n">img</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="n">stretch</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">img</span>
+
+<span class="n">overview</span><span class="o">.</span><span class="n">prerequisites</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">10.8</span><span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">hr_visual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Make a High Resolution visual BW image composite from Seviri</span>
@@ -348,7 +350,7 @@ that only the area of interest is depicted in the RGB composites.</p>
 </div>
 <p>Now we have projected data onto the &#8220;eurol&#8221; area in the <cite>local_data</cite> variable
 and we can operate as before to generate and play with RGB composites:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">local_data</span><span class="o">.</span><span class="n">overview</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">local_data</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">overview</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;./local_overview.tif&quot;</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
