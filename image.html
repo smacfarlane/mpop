@@ -153,7 +153,7 @@ gamma correction, and stretching to the current image, with parameters
 <dt id="mpop.imageo.image.Image.gamma">
 <tt class="descname">gamma</tt><big>(</big><em>gamma=1.0</em><big>)</big><a class="headerlink" href="#mpop.imageo.image.Image.gamma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply gamma correction to the channels of the image. If <em>gamma</em> is a
-tuple, then is should have as many elements as the channels of the
+tuple, then it should have as many elements as the channels of the
 image, and the gamma correction is applied elementwise. If <em>gamma</em> is a
 number, the same gamma correction is applied on every channel, if there
 are several channels in the image. The behaviour of <a class="reference internal" href="#mpop.imageo.image.Image.gamma" title="mpop.imageo.image.Image.gamma"><tt class="xref py py-func docutils literal"><span class="pre">gamma()</span></tt></a> is
@@ -339,7 +339,7 @@ file.</p>
 
 <dl class="method">
 <dt id="mpop.imageo.geo_image.GeoImage.geotiff_save">
-<tt class="descname">geotiff_save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>geotransform=None</em>, <em>spatialref=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.geotiff_save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">geotiff_save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>blocksize=0</em>, <em>geotransform=None</em>, <em>spatialref=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.geotiff_save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em> in <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, with the
 <em>compression</em> level in [0, 9]. 0 means not compressed. The <em>tags</em>
 argument is a dict of tags to include in the image (as metadata).
@@ -350,13 +350,16 @@ information, this can be overwritte by the arguments <em>geotransform</em> and
 
 <dl class="method">
 <dt id="mpop.imageo.geo_image.GeoImage.save">
-<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=0</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>format=None</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><big>(</big><em>filename</em>, <em>compression=6</em>, <em>tags=None</em>, <em>gdal_options=None</em>, <em>format=None</em>, <em>blocksize=256</em><big>)</big><a class="headerlink" href="#mpop.imageo.geo_image.GeoImage.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the image to the given <em>filename</em>. If the extension is &#8220;tif&#8221;,
 the image is saved to <a class="reference external" href="http://trac.osgeo.org/geotiff/">geotiff</a> format, in which case the <em>compression</em>
 level can be given ([0, 9], 0 meaning off). See also
 <tt class="xref py py-meth docutils literal"><span class="pre">image.Image.save()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">image.Image.double_save()</span></tt>, and
 <tt class="xref py py-meth docutils literal"><span class="pre">image.Image.secure_save()</span></tt>.  The <em>tags</em> argument is a dict of tags
-to include in the image (as metadata).</p>
+to include in the image (as metadata), and the <em>gdal_options</em> holds
+options for the gdal saving driver. A <em>blocksize</em> other than 0 will
+result in a tiled image (if possible), with tiles of size equal to
+<em>blocksize</em>.</p>
 </dd></dl>
 
 </dd></dl>

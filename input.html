@@ -50,7 +50,19 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Input plugins: the <tt class="docutils literal"><span class="pre">mpop.satin</span></tt> package</a><ul>
-<li><a class="reference internal" href="#available-plugins">Available plugins</a></li>
+<li><a class="reference internal" href="#available-plugins-and-their-requirements">Available plugins and their requirements</a><ul>
+<li><a class="reference internal" href="#mipp">mipp</a></li>
+<li><a class="reference internal" href="#aapp1b">aapp1b</a></li>
+<li><a class="reference internal" href="#eps-format">eps_format</a></li>
+<li><a class="reference internal" href="#thin-modis">thin_modis</a></li>
+<li><a class="reference internal" href="#msg-hdf">msg_hdf</a></li>
+<li><a class="reference internal" href="#pps-hdf">pps_hdf</a></li>
+<li><a class="reference internal" href="#hrpt">hrpt</a></li>
+<li><a class="reference internal" href="#eps1a">eps1a</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interaction-with-reader-plugins">Interaction with reader plugins</a></li>
+<li><a class="reference internal" href="#the-plugin-api">The plugin API</a></li>
 <li><a class="reference internal" href="#adding-a-new-plugin">Adding a new plugin</a></li>
 </ul>
 </li>
@@ -90,26 +102,123 @@
             
   <div class="section" id="input-plugins-the-mpop-satin-package">
 <h1>Input plugins: the <tt class="xref py py-mod docutils literal"><span class="pre">mpop.satin</span></tt> package<a class="headerlink" href="#input-plugins-the-mpop-satin-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="available-plugins">
-<h2>Available plugins<a class="headerlink" href="#available-plugins" title="Permalink to this headline">¶</a></h2>
-<p>The available input plugins are:</p>
-<ul class="simple">
-<li><em>mipp</em> for hrit/lrit formats</li>
-<li><em>aapp1b</em> for aapp level 1b format</li>
-<li><em>eps_format</em> for eps level 1b format</li>
-<li><em>hrpt</em> to read level 0 hrpt format (experimental)</li>
-</ul>
+<div class="section" id="available-plugins-and-their-requirements">
+<h2>Available plugins and their requirements<a class="headerlink" href="#available-plugins-and-their-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mipp">
+<h3>mipp<a class="headerlink" href="#mipp" title="Permalink to this headline">¶</a></h3>
+<p>Reader for for hrit/lrit formats. Recommends numexpr and pyresample.</p>
+</div>
+<div class="section" id="aapp1b">
+<h3>aapp1b<a class="headerlink" href="#aapp1b" title="Permalink to this headline">¶</a></h3>
+<p>Reader for aapp level 1b format. Requires AHAMAP, recommends pyresample.</p>
+</div>
+<div class="section" id="eps-format">
+<h3>eps_format<a class="headerlink" href="#eps-format" title="Permalink to this headline">¶</a></h3>
+<p>Reader for eps level 1b format. Recommends pyresample.</p>
+</div>
+<div class="section" id="thin-modis">
+<h3>thin_modis<a class="headerlink" href="#thin-modis" title="Permalink to this headline">¶</a></h3>
+<p>Reader for thinned modis format (as send via Eumetcast). Require pyhdf.</p>
+</div>
+<div class="section" id="msg-hdf">
+<h3>msg_hdf<a class="headerlink" href="#msg-hdf" title="Permalink to this headline">¶</a></h3>
+<p>Reader for msg cloud products. Requires pytable and acpg.</p>
+</div>
+<div class="section" id="pps-hdf">
+<h3>pps_hdf<a class="headerlink" href="#pps-hdf" title="Permalink to this headline">¶</a></h3>
+<p>Reader for pps cloud products. Requires acpg.</p>
+</div>
+<div class="section" id="hrpt">
+<h3>hrpt<a class="headerlink" href="#hrpt" title="Permalink to this headline">¶</a></h3>
+<p>Reader for level 0 hrpt format. Requires AAPP and pynav.</p>
+</div>
+<div class="section" id="eps1a">
+<h3>eps1a<a class="headerlink" href="#eps1a" title="Permalink to this headline">¶</a></h3>
+<p>Reader for level 1a metop segments. Requires AAPP, kai and eugene.</p>
+</div>
+</div>
+<div class="section" id="interaction-with-reader-plugins">
+<h2>Interaction with reader plugins<a class="headerlink" href="#interaction-with-reader-plugins" title="Permalink to this headline">¶</a></h2>
+<p>The reader plugin instance used for a specific scene is accessible through a
+scene attribute named after the plugin format. For example, the attribute for
+the <em>foo</em> format would be called <em>foo_reader</em>.</p>
+<p>This way the other methods present in the plugins are available through the
+scene object.</p>
+</div>
+<div class="section" id="the-plugin-api">
+<h2>The plugin API<a class="headerlink" href="#the-plugin-api" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 0.11.0: </span>New plugin API</p>
+<span class="target" id="module-mpop.plugin_base"></span><p>The <a class="reference internal" href="#module-mpop.plugin_base" title="mpop.plugin_base"><tt class="xref py py-mod docutils literal"><span class="pre">mpop.plugin_base</span></tt></a> module defines the plugin API.</p>
+<dl class="class">
+<dt id="mpop.plugin_base.Plugin">
+<em class="property">class </em><tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">Plugin</tt><a class="headerlink" href="#mpop.plugin_base.Plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base plugin class. It is not to be used as is, it has to be
+inherited by other classes.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="mpop.plugin_base.Reader">
+<em class="property">class </em><tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">Reader</tt><big>(</big><em>scene</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader plugins. They should have a <em>pformat</em> attribute, and implement
+the <em>load</em> method. This is an abstract class to be inherited.</p>
+<dl class="method">
+<dt id="mpop.plugin_base.Reader.load">
+<tt class="descname">load</tt><big>(</big><em>channels_to_load</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.Reader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the <em>channels_to_load</em> into the scene object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mpop.plugin_base.Writer">
+<em class="property">class </em><tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">Writer</tt><big>(</big><em>scene</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writer plugins. They must implement the <em>save</em> method. This is an
+abstract class to be inherited.</p>
+<dl class="method">
+<dt id="mpop.plugin_base.Writer.save">
+<tt class="descname">save</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.Writer.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the scene to a given <em>filename</em>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.plugin_base.get_plugin">
+<tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">get_plugin</tt><big>(</big><em>ptype</em>, <em>pformat</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.get_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the class of a plugin, given its <em>ptype</em> and <em>pformat</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.plugin_base.get_plugin_formats">
+<tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">get_plugin_formats</tt><big>(</big><em>ptype</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.get_plugin_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the different formats for plugins of a given <em>ptype</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.plugin_base.get_plugin_types">
+<tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">get_plugin_types</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.plugin_base.get_plugin_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list of available plugin types.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.plugin_base.load_plugins">
+<tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">load_plugins</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.plugin_base.load_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read all plugins available from directories in <em>mpop.cfg</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mpop.plugin_base.load_plugins_from_dir">
+<tt class="descclassname">mpop.plugin_base.</tt><tt class="descname">load_plugins_from_dir</tt><big>(</big><em>directory</em><big>)</big><a class="headerlink" href="#mpop.plugin_base.load_plugins_from_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load all the plugins from <em>directory</em>.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="adding-a-new-plugin">
 <h2>Adding a new plugin<a class="headerlink" href="#adding-a-new-plugin" title="Permalink to this headline">¶</a></h2>
-<p>The interface of any reader plugin must include the <tt class="xref py py-func docutils literal"><span class="pre">load()</span></tt> function and
-optionally the <tt class="xref py py-func docutils literal"><span class="pre">get_lon_lat()</span></tt> function.</p>
-<ul class="simple">
-<li><tt class="xref py py-func docutils literal"><span class="pre">load()</span></tt>: loads the calibrated data into the channels.</li>
-<li><tt class="xref py py-func docutils literal"><span class="pre">get_lat_lon()</span></tt>: returns the latitude and longitude of the satellite
-view. This is needed only when the satellite view cannot be expressed
-analytically (swath).</li>
-</ul>
+<p>For now only reader and writer plugins base classes are defined.</p>
+<p>To add one of those, just create a new class that subclasses the plugin.</p>
+<p>The interface of any reader plugin must include the <tt class="xref py py-meth docutils literal"><span class="pre">load()</span></tt> method.</p>
 <p>Take a look at the existing readers for more insight.</p>
 </div>
 </div>

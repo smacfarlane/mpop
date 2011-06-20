@@ -90,7 +90,7 @@
 <p>Batch run stuff.</p>
 <dl class="class">
 <dt id="mpop.saturn.runner.SequentialRunner">
-<em class="property">class </em><tt class="descclassname">mpop.saturn.runner.</tt><tt class="descname">SequentialRunner</tt><big>(</big><em>satellite</em>, <em>tasklist</em>, <em>precompute=False</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">mpop.saturn.runner.</tt><tt class="descname">SequentialRunner</tt><big>(</big><em>satellite</em>, <em>instrument</em>, <em>tasklist</em>, <em>precompute=False</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs scenes in a sequential order, as opposed to parallelized running.</p>
 <dl class="method">
 <dt id="mpop.saturn.runner.SequentialRunner.run_from_cmd">
@@ -108,6 +108,12 @@
 <dt id="mpop.saturn.runner.SequentialRunner.run_from_local_data">
 <tt class="descname">run_from_local_data</tt><big>(</big><em>tasklist=None</em>, <em>extra_tags=None</em><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner.run_from_local_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run on given local data (already projected).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.runner.SequentialRunner.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.runner.SequentialRunner.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the runner.</p>
 </dd></dl>
 
 </dd></dl>
@@ -188,6 +194,12 @@ argument.</p>
 <dd><p>Stops a running process.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileProcessor.terminate">
+<tt class="descname">terminate</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileProcessor.terminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate thread.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -199,6 +211,17 @@ argument.</p>
 <tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileWatcher.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the file watcher.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileWatcher.terminate">
+<tt class="descname">terminate</tt><big>(</big><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileWatcher.terminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate thread.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mpop.saturn.filewatcher.FileWatcher.wait">
+<tt class="descname">wait</tt><big>(</big><em>secs</em><big>)</big><a class="headerlink" href="#mpop.saturn.filewatcher.FileWatcher.wait" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
