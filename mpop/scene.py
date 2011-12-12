@@ -287,6 +287,30 @@ class SatelliteInstrumentScene(SatelliteScene):
     def __iter__(self):
         return self.channels.__iter__()
 
+    def _set_reader(self, pformat):
+        """Gets the reader for *pformat* format, and puts it in the `reader`
+        attribute.
+        """
+
+        elements = pformat.split(".")
+        reader_module = ".".join(elements[:-1])
+        reader_class = elements[-1]
+        
+        reader = "mpop.satin."+reader_module
+        try:
+            # Look for builtin reader
+            loader = __import__(reader, globals(),
+                                locals(), [reader_class])
+        except ImportError:
+            # Look for custom reader
+            loader = __import__(reader_module, globals(),
+                                locals(), [reader_class])
+
+        loader = getattr(loader, reader_class)
+        reader_instance = loader(self)
+        setattr(self, loader.pformat + "_reader", reader_instance)
+
+        return reader_instance
 
 
     def load(self, channels=None, load_again=False, area_extent=None, **kwargs):
@@ -330,8 +354,7 @@ class SatelliteInstrumentScene(SatelliteScene):
                     self.unload(chn)
                     loaded_channels = []
         else:
-            for chn in loaded_channels:
-                self.channels_to_load -= set([chn])
+            self.channels_to_load -= set(loaded_channels)
 
         # find the plugin to use from the config file
         conf = ConfigParser.ConfigParser()
@@ -369,18 +392,8 @@ class SatelliteInstrumentScene(SatelliteScene):
                 reader_name = str(reader_name)
             LOG.debug("Using plugin mpop.satin."+reader_name)
 
-            # read the data
-            reader = "mpop.satin."+reader_name
             try:
-                try:
-                    # Look for builtin reader
-                    reader_module = __import__(reader, globals(),
-                                               locals(), ['load'])
-                except ImportError:
-                    # Look for custom reader
-                    reader_module = __import__(reader_name, globals(),
-                                               locals(), ['load'])
-                                               
+                reader_instance = self._set_reader(reader_name)
                 if area_extent is not None:
                     if(isinstance(area_extent, (tuple, list)) and
                        len(area_extent) == 4):
@@ -388,9 +401,9 @@ class SatelliteInstrumentScene(SatelliteScene):
                     else:
                         raise ValueError("Area extent must be a sequence of "
                                          "four numbers.")
-                reader_module.load(self, **kwargs)
+                reader_instance.load(self.channels_to_load, **kwargs)
             except ImportError:
-                LOG.exception("ImportError while loading "+reader+".")
+                LOG.exception("ImportError while loading "+reader_name+".")
                 continue
             loaded_channels = [chn.name for chn in self.loaded_channels()]
             self.channels_to_load = set([chn for chn in self.channels_to_load
