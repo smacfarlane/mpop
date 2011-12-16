@@ -53,7 +53,6 @@ class MippReader(Reader):
     """Reader for HRIT/LRIT data through mipp.
     """
     pformat = "mipp"
-    cases = {}
 
     def load(self, channels_to_load, **kwargs):
         """Read data from file and load it into *self._scene*. The *calibrate*

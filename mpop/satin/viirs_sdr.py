@@ -36,6 +36,7 @@ import h5py
 
 from mpop import CONFIG_PATH
 from mpop.satin.logger import LOG
+from mpop.plugin_base import Reader
 
 EPSILON = 0.001
 
@@ -203,6 +204,13 @@ def get_lonlat(filename, band_id):
     h5f.close()
     return lons, lats
 
+class ViirsSdrReader(Reader):
+    """Reader for the VIIRS SRD data.
+    """
+    pformat = "viirs_sdr"
+
+    def load(self, channels_to_load, **kwargs):
+        return load(self._scene, **kwargs) 
 
 def load(satscene, *args, **kwargs):
     """Read data from file and load it into *satscene*.

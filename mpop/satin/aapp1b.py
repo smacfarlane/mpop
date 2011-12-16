@@ -36,11 +36,19 @@ import numpy as np
 
 from mpop import CONFIG_PATH
 from mpop.satin.logger import LOG
-
+from mpop.plugin_base import Reader
 
 # Using ahamap
 
 EPSILON = 0.001
+
+class Aapp1bReader(Reader):
+    """Reader for AAPP level 1b data.
+    """
+    pformat = "aapp1b"
+
+    def load(self, channels_to_load, **kwargs):
+        return load(self._scene, **kwargs)
 
 def load(satscene, *args, **kwargs):
     """Read data from file and load it into *satscene*.
