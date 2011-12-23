@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright (c) 2010.
+# Copyright (c) 2010, 2011.
 
 # SMHI,
 # Folkborgsvägen 1,
@@ -1078,6 +1078,15 @@ def get_best_product(filename):
             break
     return msg_filename
 
+from mpop.plugin_base import Reader
+
+class MsgHdfReader(Reader):
+    """Reader for MSG HDF data.
+    """
+    pformat = "msg_hdf"
+
+    def load(self, channels_to_load, **kwargs):
+        return load(self._scene, **kwargs)
     
 def load(scene, **kwargs):
     """Load data into the *channels*. *Channels* is a list or a tuple

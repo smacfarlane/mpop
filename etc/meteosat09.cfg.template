@@ -13,7 +13,7 @@ filename = 'H-000-MSG?__-MSG?________-%(channel)s-%(segment)s-%Y%m%d%H%M-__'
 dir = '/local_disk/usr/src/msg/import/SEVIRI_data.20091008'
 
 [seviri-level2]
-format = 'mipp'
+format = 'mipp.MippReader'
 
 [seviri-level3]
 filename = SAFNWC_MSG?_%(product)s%Y%m%d%H%M_%(area)s
