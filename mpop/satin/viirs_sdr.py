@@ -213,6 +213,9 @@ def load(satscene, *args, **kwargs):
     for option, value in conf.items(satscene.instrument_name+"-level2",
                                     raw = True):
         options[option] = value
+    #Allow options in the config file to be overridden
+    for key in kwargs:
+        options[key] = kwargs[key]
     CASES[satscene.instrument_name](satscene, options)
 
 
